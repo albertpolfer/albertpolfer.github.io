@@ -22,3 +22,6 @@ desktop.ini
 .DS_Store
 *.tmp
 *.bak
+
+# Copia local del sitio antes del rediseño (no publicar)
+_backup/

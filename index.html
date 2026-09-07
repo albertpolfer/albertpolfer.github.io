@@ -28,7 +28,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -38,35 +38,225 @@
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html">Albert Polo<span class="dot">.</span></a>
-    <nav class="site-nav" aria-label="Principal">
-      <a href="index.html" aria-current="page">Sobre mí</a>
-      <a href="servicios.html">Servicios</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">
+      <span></span>
+    </button>
+    <nav class="site-nav" id="nav-principal" aria-label="Principal">
+      <a href="#sobre" data-i18n="nav.about">Sobre mí</a>
+      <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+      <a href="servicios.html" data-i18n="nav.services">Servicios</a>
+      <a href="#trabajo" data-i18n="nav.work">Portfolio</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </nav>
+    <div class="lang-switch" aria-label="Selector de idioma" role="group">
+      <button type="button" class="lang-button is-active" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" class="lang-button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
 <main id="contenido">
 
-  <!-- ================= HERO ================= -->
   <section class="hero grid-bg">
     <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <h1>Ingeniero de Sistemas <span class="dot">·</span> Barcelona</h1>
-          <p class="sub">Perfil técnico generalista con foco en infraestructura, automatización y ciberseguridad. Disponible para proyectos y colaboraciones puntuales.</p>
+      <div class="hero-grid hero-enter">
+        <div class="hero-copy">
+          <p class="kicker" data-i18n="hero.kicker">Barcelona · Disponible para proyectos</p>
+          <h1>Albert Polo<span class="dot">.</span></h1>
+          <p class="role" data-i18n="hero.role">Ingeniero de sistemas · infraestructura, automatización y ciberseguridad</p>
+          <p class="sub" data-i18n="hero.sub">Diseño entornos que se pueden repetir, auditar y operar con scripts. Si un informe o un cambio hay que hacerlo treinta veces, no se hace a mano.</p>
           <div class="btn-row">
-            <a class="btn solid" href="servicios.html">Ver servicios</a>
-            <a class="btn" href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
+            <a class="btn solid" href="#contacto" data-i18n="hero.contact">Contactar conmigo</a>
+            <a class="btn" href="#trabajo" data-i18n="hero.work">Ver mi trabajo</a>
           </div>
         </div>
-        <div class="portrait" aria-hidden="true">
-          <span>Foto · pendiente</span>
+
+        <div class="hero-visual">
+          <div class="hero-stage">
+            <div class="portrait" data-tilt data-parallax="0.08" aria-hidden="true">
+              <div class="portrait-inner">
+                <p class="portrait-mark">AP</p>
+                <p class="portrait-meta">Ingeniero de sistemas · BCN</p>
+              </div>
+            </div>
+            <aside class="float-card">
+              <svg viewBox="0 0 240 92" role="img" aria-label="Esquema de infraestructura: identidad, escritorio remoto y automatización">
+                <rect x="8" y="18" width="64" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                <text x="40" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">ENTRA ID</text>
+                <path d="M72 38h28" stroke="#b8893a" stroke-width="1.4" fill="none"/>
+                <rect x="100" y="14" width="72" height="48" rx="6" fill="none" stroke="#b8893a" stroke-width="1.5"/>
+                <text x="136" y="34" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#b8893a">AVD</text>
+                <text x="136" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="currentColor">BICEP</text>
+                <path d="M172 38h28" stroke="currentColor" stroke-width="1.4" fill="none"/>
+                <rect x="200" y="22" width="32" height="32" rx="6" fill="none" stroke="currentColor" stroke-width="1.4"/>
+                <text x="216" y="41" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">PS</text>
+              </svg>
+              <p>Azure · identidad híbrida · código</p>
+            </aside>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= EXPERIENCIA ================= -->
+  <section class="section tight" id="confianza" aria-label="Cifras">
+    <div class="wrap" data-reveal>
+      <div class="stats">
+        <div class="stat">
+          <b data-count="5" data-suffix="+">5+</b>
+          <span>años administrando sistemas en producción</span>
+        </div>
+        <div class="stat">
+          <b>Azure</b>
+          <span>escritorio remoto, identidad y Microsoft 365</span>
+        </div>
+        <div class="stat">
+          <b>IaC</b>
+          <span>entornos definidos en Bicep y operados por script</span>
+        </div>
+        <div class="stat">
+          <b>B2</b>
+          <span>inglés de competencia profesional · Cambridge 179</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Sobre mí</p>
+      <h2 class="title">Técnico generalista, con criterio de producción</h2>
+      <div class="about-grid">
+        <div>
+          <p class="lead">Trabajo en infraestructura Windows y Linux, nube Azure y automatización. El hilo común es el mismo: menos intervención manual, más sistemas que se pueden explicar y volver a levantar.</p>
+          <p class="lead muted">Hoy soy System Engineer en una consultora de Barcelona. En paralelo desarrollo ReportAuto, un producto de informes automáticos para administradores de fincas, y acepto colaboraciones puntuales compatibles con ese empleo.</p>
+        </div>
+        <div class="about-note">
+          <p>No vendo humo ni un stack de moda. Si un cambio hay que hacerlo en una flota, primero va un piloto, después una verificación y al final el despliegue.</p>
+          <p>Si quieres un informe mensual que salga solo, o un script que quite trabajo repetido, dime qué tienes ahora y qué te gustaría que pasara.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="servicios">
+    <div class="wrap" data-reveal>
+      <div class="section-head">
+        <p class="eyebrow">Servicios</p>
+        <h2 class="title">Lo que puedes contratar</h2>
+      </div>
+      <div class="service-grid" data-stagger>
+        <article class="service featured">
+          <span class="tag">Principal</span>
+          <h3>ReportAuto para administradores de fincas</h3>
+          <p class="benefit">El informe mensual de cada comunidad, en minutos y no en una tarde.</p>
+          <p class="who">Para despachos que cada mes copian números, calculan morosos y redactan el mismo PDF con distinto encabezado.</p>
+          <ul>
+            <li>Subes el Excel o CSV de cuentas</li>
+            <li>El sistema calcula; la IA solo redacta sobre números ya verificados</li>
+            <li>Descargas un PDF listo para entregar</li>
+            <li>Planes desde 49 €/mes, sin permanencia</li>
+          </ul>
+          <a class="btn solid" href="servicios.html">Ver el producto</a>
+        </article>
+        <article class="service">
+          <span class="tag">Colaboraciones</span>
+          <h3>Automatización a medida</h3>
+          <p class="benefit">Si se repite, se puede scriptar.</p>
+          <p class="who">Para equipos que quieren quitar trabajo repetido —informes, inventario, cambios sobre varias máquinas— sin montar un proyecto de meses.</p>
+          <ul>
+            <li>Scripts en PowerShell, Python o Bash</li>
+            <li>Alcance cerrado y entregable concreto</li>
+            <li>Compatible con mi empleo principal</li>
+          </ul>
+          <a class="btn" href="#contacto">Cuéntame el caso</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="trabajo">
+    <div class="wrap" data-reveal>
+      <div class="section-head">
+        <p class="eyebrow">Portfolio</p>
+        <h2 class="title">Trabajo que se puede ver</h2>
+      </div>
+      <div class="work-grid" data-stagger>
+        <article class="work wide">
+          <div class="work-media" aria-hidden="true">
+            <svg viewBox="0 0 480 280" role="img" aria-label="Mockup del informe PDF de ReportAuto">
+              <rect x="48" y="24" width="384" height="236" rx="14" fill="#141d2e" stroke="oklch(0.81 0.11 80 / 0.35)"/>
+              <rect x="48" y="24" width="384" height="28" rx="14" fill="#1c2740"/>
+              <circle cx="68" cy="38" r="4" fill="#c45c4a"/>
+              <circle cx="84" cy="38" r="4" fill="#d4a24a"/>
+              <circle cx="100" cy="38" r="4" fill="#5aa86a"/>
+              <text x="240" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="oklch(0.81 0.11 80)">informe-comunidad.pdf</text>
+              <rect x="72" y="68" width="336" height="168" rx="6" fill="#f7f6f2"/>
+              <rect x="88" y="84" width="140" height="10" rx="2" fill="#1c2740"/>
+              <rect x="88" y="102" width="220" height="6" rx="2" fill="#c9c6be"/>
+              <rect x="88" y="128" width="48" height="72" rx="3" fill="#b8893a"/>
+              <rect x="144" y="148" width="48" height="52" rx="3" fill="#1c2740"/>
+              <rect x="200" y="138" width="48" height="62" rx="3" fill="#4a5d82"/>
+              <rect x="268" y="128" width="120" height="8" rx="2" fill="#1c2740"/>
+              <rect x="268" y="144" width="100" height="6" rx="2" fill="#c9c6be"/>
+              <rect x="268" y="158" width="110" height="6" rx="2" fill="#c9c6be"/>
+              <rect x="268" y="172" width="86" height="6" rx="2" fill="#c9c6be"/>
+            </svg>
+          </div>
+          <div class="work-body">
+            <h3>ReportAuto</h3>
+            <p>Producto propio: de un Excel de cuentas al informe mensual de la comunidad, con morosos, gastos y un análisis redactado sobre cifras ya calculadas.</p>
+            <p class="work-impact">Resultado: el trabajo que hoy ocupa una tarde por comunidad queda en minutos.</p>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">PDF</span><span class="chip">Excel / CSV</span><span class="chip">Automatización documental</span>
+            </div>
+            <a class="btn" href="servicios.html">Ver producto y planes</a>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-media" aria-hidden="true">
+            <svg viewBox="0 0 320 200" fill="none">
+              <rect x="36" y="40" width="70" height="44" rx="6" stroke="oklch(0.81 0.11 80)" />
+              <rect x="125" y="28" width="70" height="68" rx="6" stroke="#f7f6f2" />
+              <rect x="214" y="48" width="70" height="36" rx="6" stroke="oklch(0.81 0.11 80 / 0.55)" />
+              <path d="M106 62h19M195 62h19" stroke="#f7f6f2" stroke-width="1.4"/>
+              <text x="71" y="66" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="oklch(0.81 0.11 80)">AD</text>
+              <text x="160" y="60" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#f7f6f2">AVD</text>
+              <text x="249" y="70" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="oklch(0.81 0.11 80)">FILES</text>
+            </svg>
+          </div>
+          <div class="work-body">
+            <h3>Infraestructura como código</h3>
+            <p>Entornos Azure —escritorio remoto, identidad híbrida, almacenamiento— definidos en Bicep, validados antes de aplicarse y operados por script.</p>
+            <p class="work-impact">Impacto: un entorno que se puede revisar, repetir y no depende de un clic en el portal.</p>
+            <div class="chips">
+              <span class="chip">Bicep</span><span class="chip">Azure</span><span class="chip">Entra ID</span><span class="chip">PowerShell</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-media" aria-hidden="true">
+            <svg viewBox="0 0 320 200" fill="none">
+              <rect x="48" y="36" width="224" height="128" rx="8" stroke="#f7f6f2"/>
+              <path d="M64 64h80M64 84h140M64 104h110M64 124h96" stroke="oklch(0.81 0.11 80 / 0.7)"/>
+              <text x="64" y="54" font-family="'JetBrains Mono', monospace" font-size="8" fill="oklch(0.81 0.11 80)">foreach ($host in $fleet)</text>
+            </svg>
+          </div>
+          <div class="work-body">
+            <h3>Automatización de flotas</h3>
+            <p>Cambios de configuración, idioma o software sobre muchas máquinas: piloto, verificación contra una referencia y despliegue por lotes. Cero sesión interactiva por host.</p>
+            <p class="work-impact">Impacto: lo que no escala a mano, escala con un orquestador.</p>
+            <div class="chips">
+              <span class="chip">PowerShell</span><span class="chip">Run Command</span><span class="chip">Ansible</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="section" id="experiencia">
     <div class="wrap" data-reveal>
       <p class="eyebrow">Trayectoria</p>
@@ -79,7 +269,12 @@
           <div>
             <h3>Consultora IT · Barcelona</h3>
             <p class="tl-role">System Engineer</p>
-            <p class="what">Administración de infraestructura Azure y Microsoft 365 para clientes del sector empresarial. Despliegue de escritorio remoto, identidad híbrida entre Active Directory y Entra ID, y almacenamiento de perfiles en Azure Files. Los entornos se definen como código en Bicep y la operación sobre flotas de máquinas se hace por scripts.</p>
+            <p class="what">Administración de infraestructura Azure y Microsoft 365 para clientes del sector empresarial. Escritorio remoto, identidad híbrida y perfiles en la nube, con el entorno escrito como código.</p>
+            <ul class="wins">
+              <li>Despliegue de Azure Virtual Desktop e identidad híbrida entre Active Directory y Entra ID</li>
+              <li>Almacenamiento de perfiles en Azure Files</li>
+              <li>Entornos definidos en Bicep; la operación sobre flotas va por scripts, no a mano</li>
+            </ul>
             <ul class="tl-sub">
               <li>Azure</li><li>Azure Virtual Desktop</li><li>Entra ID</li><li>Bicep</li><li>PowerShell</li><li>Microsoft 365</li>
             </ul>
@@ -91,7 +286,13 @@
           <div>
             <h3>beServices · Barcelona</h3>
             <p class="tl-role">System Engineer · System Administrator · Junior System Administrator</p>
-            <p class="what">Administración y optimización de infraestructuras Linux y Windows: entornos Citrix y Azure, permisos y políticas en Windows Server, y virtualización con VMware. Automatización con Ansible y scripting en Bash, PowerShell y Python. Monitorización con Grafana y Zabbix, copias con Veeam, seguridad de endpoint con SentinelOne y proyectos de migración a Office 365.</p>
+            <p class="what">Cuatro años subiendo de junior a engineer: de apoyar servidores a operar infraestructuras Linux y Windows en producción, con virtualización, copias y monitorización de verdad.</p>
+            <ul class="wins">
+              <li>Administración de Citrix, Azure, Windows Server y VMware</li>
+              <li>Automatización con Ansible y scripting en Bash, PowerShell y Python</li>
+              <li>Monitorización con Grafana y Zabbix; copias con Veeam; endpoint con SentinelOne</li>
+              <li>Proyectos de migración a Office 365</li>
+            </ul>
             <ul class="tl-sub">
               <li>Linux</li><li>Windows Server</li><li>Citrix</li><li>VMware</li><li>Veeam</li><li>Ansible</li><li>Grafana</li><li>Zabbix</li>
             </ul>
@@ -103,7 +304,7 @@
           <div>
             <h3>Nestlé Nespresso · Barcelona</h3>
             <p class="tl-role">Telesales and Service Representative — Technician Support</p>
-            <p class="what">Soporte técnico y atención al cliente: resolución de incidencias y trabajo por objetivos.</p>
+            <p class="what">Soporte técnico y atención al cliente: resolución de incidencias y trabajo por objetivos en un entorno de ritmo alto.</p>
           </div>
         </article>
 
@@ -111,48 +312,50 @@
     </div>
   </section>
 
-  <!-- ================= FORMACIÓN ================= -->
   <section class="section" id="formacion">
     <div class="wrap" data-reveal>
       <p class="eyebrow">Estudios</p>
       <h2 class="title">Formación</h2>
 
-      <ul class="edu">
-        <li>
-          <span class="when">2022 — 2026</span>
-          <div>
-            <strong>Grau en Enginyeria Informàtica de Gestió i Sistemes d'Informació</strong>
-            <span class="where">TecnoCampus · Universitat Pompeu Fabra</span>
-          </div>
-        </li>
-        <li>
-          <span class="when">2020 — 2022</span>
-          <div>
-            <strong>Tècnic en Administració de Sistemes Informàtics en Xarxa</strong>
-            <span class="where">Institut Tecnològic de Barcelona · perfil de ciberseguretat</span>
-          </div>
-        </li>
-        <li>
-          <span class="when">2018 — 2020</span>
-          <div>
-            <strong>Batxillerat tecnològic</strong>
-            <span class="where">Institut Forat del Vent</span>
-          </div>
-        </li>
-        <li>
-          <span class="when">Certificaciones</span>
-          <div>
-            <strong>B2 First — Score 179</strong>
-            <span class="where">Cambridge English</span>
-          </div>
-        </li>
-      </ul>
+      <div class="edu-grid">
+        <ul class="edu">
+          <li>
+            <span class="when">2022 — 2026</span>
+            <div>
+              <strong>Grau en Enginyeria Informàtica de Gestió i Sistemes d'Informació</strong>
+              <span class="where">TecnoCampus · Universitat Pompeu Fabra</span>
+            </div>
+          </li>
+          <li>
+            <span class="when">2020 — 2022</span>
+            <div>
+              <strong>Tècnic en Administració de Sistemes Informàtics en Xarxa</strong>
+              <span class="where">Institut Tecnològic de Barcelona · perfil de ciberseguretat</span>
+            </div>
+          </li>
+          <li>
+            <span class="when">2018 — 2020</span>
+            <div>
+              <strong>Batxillerat tecnològic</strong>
+              <span class="where">Institut Forat del Vent</span>
+            </div>
+          </li>
+        </ul>
 
-      <p class="lead muted idiomas">Idiomas: catalán y castellano nativos, inglés de competencia profesional.</p>
+        <div class="side-cards">
+          <div class="side-card">
+            <h3>Certificaciones</h3>
+            <p>B2 First — Score 179<br>Cambridge English</p>
+          </div>
+          <div class="side-card">
+            <h3>Idiomas</h3>
+            <p>Catalán y castellano nativos. Inglés de competencia profesional.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ================= TECNOLOGÍAS ================= -->
   <section class="section" id="tecnologias">
     <div class="wrap" data-reveal>
       <p class="eyebrow">Herramientas de trabajo</p>
@@ -202,10 +405,51 @@
     </div>
   </section>
 
+  <section class="section navy cta-band" id="contacto">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Contacto</p>
+      <h2 class="title">¿Tienes un proyecto en mente?</h2>
+      <p class="lead muted">Cuéntame qué necesitas y veamos cómo puedo ayudarte. Respondo en menos de 24 horas laborables.</p>
+
+      <div class="form-grid" style="margin-top:34px">
+        <form data-mailform data-subject="Contacto desde la web">
+          <label class="field">
+            <span>Nombre</span>
+            <input type="text" name="nombre" autocomplete="name" required>
+          </label>
+          <label class="field">
+            <span>Empresa</span>
+            <input type="text" name="empresa" autocomplete="organization">
+          </label>
+          <label class="field">
+            <span>Correo</span>
+            <input type="email" name="correo" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>Mensaje</span>
+            <textarea name="mensaje" required placeholder="Qué tienes ahora y qué te gustaría que pasara."></textarea>
+          </label>
+          <button type="submit" class="btn solid">Enviar</button>
+          <p class="formstatus" role="status" aria-live="polite"></p>
+          <p class="finenote">El formulario abre tu programa de correo con el mensaje ya escrito. No se envía nada a ningún servidor ni se guarda ningún dato en esta web.</p>
+        </form>
+
+        <div>
+          <p class="eyebrow">O escríbeme directamente</p>
+          <button type="button" class="mailbtn big" data-mail>
+            <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+          </button>
+          <br>
+          <button type="button" class="copybtn" data-copy>Copiar correo</button>
+          <p class="finenote" style="margin-top:28px">También estoy en <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<!-- ================= PIE ================= -->
-<footer class="site-footer navy">
+<footer class="site-footer">
   <div class="wrap inner">
     <div class="cols">
       <div>

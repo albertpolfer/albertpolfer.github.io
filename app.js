@@ -4,6 +4,71 @@
 (function () {
   "use strict";
 
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var translations = {
+    es: {
+      "nav.about": "Sobre mí",
+      "nav.experience": "Experiencia",
+      "nav.services": "Servicios",
+      "nav.work": "Portfolio",
+      "nav.contact": "Contacto",
+      "hero.kicker": "Barcelona · Disponible para proyectos",
+      "hero.role": "Ingeniero de sistemas · infraestructura, automatización y ciberseguridad",
+      "hero.sub": "Diseño entornos que se pueden repetir, auditar y operar con scripts. Si un informe o un cambio hay que hacerlo treinta veces, no se hace a mano.",
+      "hero.contact": "Contactar conmigo",
+      "hero.work": "Ver mi trabajo"
+    },
+    en: {
+      "nav.about": "About me",
+      "nav.experience": "Experience",
+      "nav.services": "Services",
+      "nav.work": "Portfolio",
+      "nav.contact": "Contact",
+      "hero.kicker": "Barcelona · Available for projects",
+      "hero.role": "Systems engineer · infrastructure, automation and cybersecurity",
+      "hero.sub": "I design environments that can be repeated, audited and operated with scripts. If an item has to be done thirty times, it is not done by hand.",
+      "hero.contact": "Get in touch",
+      "hero.work": "See my work"
+    }
+  };
+
+  function applyLanguage(lang) {
+    var selected = translations[lang] ? lang : "es";
+    document.documentElement.lang = selected;
+    document.documentElement.setAttribute("data-lang", selected);
+
+    each("[data-i18n]", function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (translations[selected][key]) {
+        el.textContent = translations[selected][key];
+      }
+    });
+
+    each(".lang-button", function (button) {
+      var isActive = button.getAttribute("data-lang") === selected;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+      button.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+
+    try {
+      localStorage.setItem("preferred-language", selected);
+    } catch (err) {}
+  }
+
+  var savedLanguage = null;
+  try {
+    savedLanguage = localStorage.getItem("preferred-language");
+  } catch (err) {}
+  var initialLang = translations[savedLanguage] ? savedLanguage : (document.documentElement.lang || "es");
+  applyLanguage(initialLang);
+
+  each(".lang-button", function (button) {
+    button.addEventListener("click", function () {
+      applyLanguage(button.getAttribute("data-lang"));
+    });
+  });
+
   /* ---- Correo ofuscado: no hay ningún mailto: en el HTML servido ---- */
   var parts = ["albertpolfer", "gmail", "com"];
   var addr = parts[0] + String.fromCharCode(64) + parts[1] + "." + parts[2];
@@ -41,12 +106,10 @@
     });
   });
 
-  /* ---- Botones que abren el diálogo de impresión ---- */
   each("[data-print]", function (btn) {
     btn.addEventListener("click", function (ev) { ev.preventDefault(); window.print(); });
   });
 
-  /* ---- Un plan preselecciona su nombre en el formulario ---- */
   each("[data-plan]", function (btn) {
     btn.addEventListener("click", function () {
       var sel = document.getElementById("plan");
@@ -54,8 +117,7 @@
     });
   });
 
-  /* ---- Formulario: compone el correo en el cliente local.
-          No se envía nada a ningún servidor ni se guarda nada. ---- */
+  /* ---- Formulario: compone el correo en el cliente local. ---- */
   var form = document.querySelector("[data-mailform]");
   if (form) {
     var status = form.querySelector(".formstatus");
@@ -78,9 +140,9 @@
       }
 
       var lines = [];
-      var order = ["nombre", "despacho", "correo", "telefono", "comunidades", "plan"];
+      var order = ["nombre", "despacho", "empresa", "correo", "telefono", "comunidades", "plan"];
       var names = {
-        nombre: "Nombre", despacho: "Despacho", correo: "Correo",
+        nombre: "Nombre", despacho: "Despacho", empresa: "Empresa", correo: "Correo",
         telefono: "Teléfono", comunidades: "Comunidades que gestiona", plan: "Plan de interés"
       };
       order.forEach(function (k) {
@@ -100,30 +162,127 @@
     });
   }
 
-  /* ---- Aparición al hacer scroll, respetando prefers-reduced-motion ---- */
-  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* ---- Navbar al scroll y menú móvil ---- */
+  var header = document.querySelector(".site-header");
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.querySelector(".site-nav");
+
+  function setScrolled() {
+    if (!header) { return; }
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }
+  setScrolled();
+  window.addEventListener("scroll", setScrolled, { passive: true });
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", function () {
+      var open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", open ? "false" : "true");
+      nav.classList.toggle("is-open", !open);
+      document.body.style.overflow = open ? "" : "hidden";
+    });
+    each(".site-nav a", function (a) {
+      a.addEventListener("click", function () {
+        toggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("is-open");
+        document.body.style.overflow = "";
+      });
+    });
+  }
+
+  /* ---- Aparición al hacer scroll ---- */
   var revealed = [];
 
   if (!calm && "IntersectionObserver" in window) {
     revealed = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
     revealed.forEach(function (n) {
-      n.style.transition = "opacity 640ms cubic-bezier(.22,.61,.36,1), transform 640ms cubic-bezier(.22,.61,.36,1)";
+      n.style.transition = "opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)";
       n.style.opacity = "0";
-      n.style.transform = "translateY(14px)";
+      n.style.transform = "translateY(18px)";
     });
+
+    each("[data-stagger]", function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.transition = "opacity 640ms cubic-bezier(.22,.61,.36,1), transform 640ms cubic-bezier(.22,.61,.36,1)";
+        child.style.transitionDelay = (i * 90) + "ms";
+        child.style.opacity = "0";
+        child.style.transform = "translateY(16px)";
+      });
+    });
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.style.opacity = "1";
-          e.target.style.transform = "none";
-          io.unobserve(e.target);
+        if (!e.isIntersecting) { return; }
+        e.target.style.opacity = "1";
+        e.target.style.transform = "none";
+        var group = e.target.hasAttribute("data-stagger") ? e.target : e.target.querySelector("[data-stagger]");
+        if (group) {
+          Array.prototype.forEach.call(group.children, function (child) {
+            child.style.opacity = "1";
+            child.style.transform = "none";
+          });
         }
+        io.unobserve(e.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
     revealed.forEach(function (n) { io.observe(n); });
   }
 
-  /* ---- Nada invisible al imprimir ---- */
+  /* ---- Contadores ---- */
+  if (!calm && "IntersectionObserver" in window) {
+    var nums = Array.prototype.slice.call(document.querySelectorAll("[data-count]"));
+    var nio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) { return; }
+        var el = e.target;
+        var target = parseFloat(el.getAttribute("data-count"), 10);
+        var suffix = el.getAttribute("data-suffix") || "";
+        var prefix = el.getAttribute("data-prefix") || "";
+        var start = performance.now();
+        var dur = 1100;
+        function tick(now) {
+          var t = Math.min(1, (now - start) / dur);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = Math.round(target * eased);
+          el.textContent = prefix + val + suffix;
+          if (t < 1) { requestAnimationFrame(tick); }
+        }
+        requestAnimationFrame(tick);
+        nio.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    nums.forEach(function (n) { nio.observe(n); });
+  }
+
+  /* ---- Inclinación suave al cursor ---- */
+  if (!calm && window.matchMedia("(pointer: fine)").matches) {
+    each("[data-tilt]", function (el) {
+      el.addEventListener("pointermove", function (ev) {
+        var r = el.getBoundingClientRect();
+        var x = (ev.clientX - r.left) / r.width - 0.5;
+        var y = (ev.clientY - r.top) / r.height - 0.5;
+        el.style.transform = "perspective(900px) rotateY(" + (x * 5) + "deg) rotateX(" + (-y * 5) + "deg)";
+      });
+      el.addEventListener("pointerleave", function () {
+        el.style.transform = "";
+      });
+    });
+  }
+
+  /* ---- Parallax muy sutil ---- */
+  if (!calm) {
+    var layers = Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+    if (layers.length) {
+      window.addEventListener("scroll", function () {
+        var y = window.scrollY;
+        layers.forEach(function (el) {
+          var speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
+          el.style.transform = "translateY(" + (y * speed * 0.15) + "px)";
+        });
+      }, { passive: true });
+    }
+  }
+
   window.addEventListener("beforeprint", function () {
     revealed.forEach(function (n) { n.style.opacity = "1"; n.style.transform = "none"; });
   });
