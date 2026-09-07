@@ -4,20 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Albert Polo — Cloud System Engineer</title>
-<meta name="description" content="Albert Polo Fernández, Cloud System Engineer en Barcelona. Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización con Ansible y monitorización con Grafana y Zabbix.">
+<title>Albert Polo — Infraestructura Azure y Microsoft 365</title>
+<meta name="description" content="Consultoría de infraestructura Azure y Microsoft 365 en Barcelona. Azure Virtual Desktop, identidad híbrida con Entra ID, infraestructura como código con Bicep y automatización con PowerShell.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://albertpolfer.github.io/">
 
 <meta property="og:type" content="profile">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Albert Polo">
-<meta property="og:title" content="Albert Polo — Cloud System Engineer">
-<meta property="og:description" content="Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización y monitorización. Barcelona.">
+<meta property="og:title" content="Albert Polo — Infraestructura Azure y Microsoft 365">
+<meta property="og:description" content="Azure Virtual Desktop, identidad híbrida, infraestructura como código y automatización. Barcelona.">
 <meta property="og:url" content="https://albertpolfer.github.io/">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Albert Polo — Cloud System Engineer">
-<meta name="twitter:description" content="Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización y monitorización. Barcelona.">
+<meta property="og:image" content="https://albertpolfer.github.io/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Albert Polo — Infraestructura Azure y Microsoft 365">
+<meta name="twitter:description" content="Azure Virtual Desktop, identidad híbrida, infraestructura como código y automatización. Barcelona.">
+<meta name="twitter:image" content="https://albertpolfer.github.io/og.svg">
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
@@ -32,7 +34,6 @@
     --accent: oklch(0.52 0.14 42);
     --panel:  oklch(0.955 0.005 70);
     --rule:   oklch(0.24 0.012 60 / 0.16);
-    --soft:   oklch(0.24 0.012 60 / 0.72);
 
     --sans:  Archivo, "Segoe UI", system-ui, sans-serif;
     --serif: Newsreader, Georgia, "Times New Roman", serif;
@@ -40,7 +41,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 24px; }
 
   body {
     margin: 0;
@@ -55,381 +56,277 @@
   a:hover { color: var(--accent); }
   ::selection { background: var(--accent); color: var(--paper); }
 
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
   .skip {
     position: absolute; left: -9999px; top: 0;
     background: var(--ink); color: var(--paper);
     font-family: var(--mono); font-size: 12px;
-    padding: 10px 14px; z-index: 20;
+    padding: 10px 14px; z-index: 30;
   }
   .skip:focus { left: 8px; top: 8px; }
 
-  /* ---------- Marcadores de contenido pendiente ---------- */
+  .mono { font-family: var(--mono); }
+
+  /* ---------- Pendientes ---------- */
 
   .todo {
     font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.7;
-    letter-spacing: 0.04em;
-    margin: 14px 0 0;
-    padding: 12px 14px;
+    font-size: 11px; line-height: 1.7; letter-spacing: 0.04em;
+    margin: 14px 0 0; padding: 12px 14px;
     border: 1px dashed oklch(0.24 0.012 60 / 0.4);
     color: oklch(0.24 0.012 60 / 0.85);
-    background: oklch(0.955 0.005 70);
-    max-width: 54ch;
+    background: var(--panel);
+    max-width: 60ch;
   }
 
   /* ---------- Estructura ---------- */
 
   .shell {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    display: flex; flex-wrap: wrap; align-items: flex-start;
     gap: clamp(28px, 5vw, 72px);
-    max-width: 1320px;
-    margin: 0 auto;
+    max-width: 1320px; margin: 0 auto;
     padding: clamp(24px, 5vw, 56px) clamp(20px, 4vw, 56px) 0;
   }
 
   .rail {
-    flex: 0 1 300px;
-    min-width: 260px;
-    position: sticky;
-    top: clamp(24px, 5vw, 56px);
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
+    flex: 0 1 300px; min-width: 260px;
+    position: sticky; top: clamp(24px, 5vw, 56px); align-self: flex-start;
+    display: flex; flex-direction: column; gap: 24px;
   }
 
   .name {
-    font-family: var(--serif);
-    font-weight: 400;
+    font-family: var(--serif); font-weight: 400;
     font-size: clamp(2.1rem, 3vw, 2.7rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin: 0 0 10px;
+    line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 10px;
   }
 
   .kicker {
-    margin: 0;
-    font-family: var(--mono);
-    font-size: 12px;
-    line-height: 1.6;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
+    margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.6;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
   }
+  .place { margin: 6px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; opacity: 0.75; }
 
-  .place {
-    margin: 6px 0 0;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    opacity: 0.75;
-  }
-
-  .railnav {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
-  }
+  .railnav { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule); padding-top: 20px; }
   .railnav a {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.72;
-    width: fit-content;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.62; width: fit-content;
+    border-left: 2px solid transparent; padding-left: 10px; margin-left: -12px;
+    transition: opacity 200ms, border-color 200ms;
   }
-  .railnav a:hover, .railnav a:focus-visible { opacity: 1; }
+  .railnav a:hover { opacity: 1; }
+  .railnav a[aria-current="true"] { opacity: 1; border-left-color: var(--accent); color: var(--accent); }
 
   .railcontact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    border-top: 1px solid var(--rule);
-    padding-top: 20px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    border-top: 1px solid var(--rule); padding-top: 20px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
   }
-  .railcontact a, .railcontact .mail {
-    border-bottom: 1px solid oklch(0.24 0.012 60 / 0.28);
-    padding-bottom: 3px;
-    width: fit-content;
-  }
+  .railcontact a, .railcontact .mail { border-bottom: 1px solid oklch(0.24 0.012 60 / 0.28); padding-bottom: 3px; width: fit-content; }
   .railcontact a:hover { border-color: var(--accent); }
 
   .mail {
-    font: inherit;
-    letter-spacing: inherit;
-    color: inherit;
-    background: none;
-    border: 0;
-    padding: 0 0 3px;
-    cursor: pointer;
-    text-align: left;
+    font: inherit; letter-spacing: inherit; color: inherit;
+    background: none; border: 0; padding: 0 0 3px; cursor: pointer; text-align: left;
   }
   .mail:hover { color: var(--accent); border-color: var(--accent); }
 
   .btn {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: 1px solid oklch(0.24 0.012 60 / 0.32);
-    background: none;
-    color: inherit;
-    padding: 13px 16px;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid oklch(0.24 0.012 60 / 0.32); background: none; color: inherit;
+    padding: 13px 16px; text-align: center; cursor: pointer; width: 100%;
+    transition: background 180ms, color 180ms, border-color 180ms;
   }
-  .btn:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
+  .btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn.solid { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .btn.solid:hover { background: var(--ink); border-color: var(--ink); }
 
-  .langbar {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-  }
+  .langbar { display: flex; gap: 6px; align-items: center; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; }
   .langbar .sep { opacity: 0.35; }
-  .langbar button {
-    background: none; border: 0; padding: 0;
-    font: inherit; letter-spacing: inherit; color: inherit;
-    opacity: 0.6; cursor: pointer;
-  }
+  .langbar button { background: none; border: 0; padding: 0; font: inherit; letter-spacing: inherit; color: inherit; opacity: 0.6; cursor: pointer; }
   .langbar button:hover { opacity: 1; }
-  .langbar [aria-current="true"] { font-weight: 500; opacity: 1; cursor: default; }
+  .langbar [aria-current="true"] { font-weight: 500; opacity: 1; }
 
-  main {
-    flex: 1 1 520px;
-    min-width: 0;
-    padding-bottom: clamp(56px, 10vh, 120px);
-  }
+  main { flex: 1 1 560px; min-width: 0; padding-bottom: clamp(56px, 10vh, 120px); }
 
   /* ---------- Secciones ---------- */
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin: 0 0 clamp(28px, 5vh, 48px);
-    opacity: 0.72;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    margin: 0 0 clamp(24px, 4vh, 40px); opacity: 0.72;
   }
 
-  #sobre { padding: clamp(8px, 4vh, 40px) 0 clamp(40px, 8vh, 84px); }
+  #sobre { padding: clamp(8px, 4vh, 40px) 0 clamp(36px, 7vh, 72px); }
 
   .lede {
-    font-family: var(--serif);
-    font-weight: 300;
+    font-family: var(--serif); font-weight: 300;
     font-size: clamp(1.6rem, 3.4vw, 3.1rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    margin: 0 0 clamp(24px, 4vh, 40px);
-    max-width: 30ch;
-    text-wrap: pretty;
+    line-height: 1.12; letter-spacing: -0.02em;
+    margin: 0 0 clamp(20px, 3vh, 34px); max-width: 30ch; text-wrap: pretty;
   }
 
-  .prose {
-    font-size: clamp(1rem, 1.3vw, 1.12rem);
-    line-height: 1.65;
-    margin: 0 0 18px;
-    max-width: 62ch;
-    text-wrap: pretty;
-  }
+  .prose { font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.65; margin: 0 0 18px; max-width: 62ch; text-wrap: pretty; }
   .prose.dim { font-size: 1rem; line-height: 1.7; margin: 0; opacity: 0.8; }
 
-  .band {
-    border-top: 1px solid var(--rule);
-    padding-top: 22px;
-  }
+  .band { border-top: 1px solid var(--rule); padding-top: 22px; margin-top: clamp(30px, 6vh, 60px); }
 
-  .job {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-    gap: clamp(16px, 3vw, 44px);
-    padding-bottom: clamp(36px, 7vh, 72px);
-  }
-  .job + .job {
-    padding-top: clamp(32px, 6vh, 64px);
-    border-top: 1px solid var(--rule);
-  }
+  /* ---------- Diagrama ---------- */
 
-  .when {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    margin: 0 0 12px;
-    color: var(--accent);
+  .figure { margin: clamp(26px, 5vh, 48px) 0 0; }
+  .figure svg { width: 100%; height: auto; display: block; }
+  .figure figcaption {
+    font-family: var(--mono); font-size: 11px; line-height: 1.7; letter-spacing: 0.04em;
+    opacity: 0.7; margin-top: 12px; max-width: 60ch;
   }
+  .dg-line { stroke: oklch(0.24 0.012 60 / 0.45); fill: none; }
+  .dg-box  { stroke: oklch(0.24 0.012 60 / 0.35); fill: oklch(0.955 0.005 70); }
+  .dg-fill { fill: oklch(0.52 0.14 42 / 0.14); stroke: oklch(0.52 0.14 42 / 0.5); }
+  .dg-t    { font-family: var(--mono); font-size: 11px; fill: oklch(0.24 0.012 60); letter-spacing: 0.03em; }
+  .dg-t.sm { font-size: 9.5px; fill: oklch(0.24 0.012 60 / 0.7); }
+  .dg-t.ac { fill: var(--accent); }
 
-  .org {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
-    line-height: 1.08;
-    letter-spacing: -0.015em;
-    margin: 0 0 8px;
+  /* ---------- Servicios ---------- */
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 268px), 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .card { background: var(--paper); padding: 22px 20px; }
+  .card > summary {
+    list-style: none; cursor: pointer; display: block;
   }
+  .card > summary::-webkit-details-marker { display: none; }
+  .card h3 {
+    font-family: var(--serif); font-weight: 400; font-size: 1.32rem;
+    line-height: 1.15; letter-spacing: -0.01em; margin: 14px 0 8px;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  }
+  .card h3 .chev { font-family: var(--mono); font-size: 12px; color: var(--accent); flex: none; transition: transform 200ms; }
+  .card[open] h3 .chev { transform: rotate(45deg); }
+  .card .pitch { margin: 0; font-size: 0.94rem; line-height: 1.6; opacity: 0.8; }
+  .card .more { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .card .more ul { margin: 0; padding-left: 1.05rem; font-size: 0.9rem; line-height: 1.65; }
+  .card .more li { margin-bottom: 5px; }
+  .card svg { color: var(--accent); }
+  .card:hover { background: var(--panel); }
 
+  /* ---------- Casos ---------- */
+
+  .case { border-top: 1px solid var(--rule); padding: 24px 0; }
+  .case:first-of-type { border-top: 0; padding-top: 4px; }
+  .case > summary { list-style: none; cursor: pointer; display: block; }
+  .case > summary::-webkit-details-marker { display: none; }
+  .case h3 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+    line-height: 1.12; letter-spacing: -0.015em; margin: 8px 0 10px;
+  }
+  .case .sector { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0; }
+  .case .sum { margin: 0; font-size: 1rem; line-height: 1.65; max-width: 60ch; }
+  .case .open-hint { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; margin: 12px 0 0; }
+  .case[open] .open-hint { display: none; }
+  .case .detail { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  .case .detail h4 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    opacity: 0.7; margin: 0 0 10px; font-weight: 400;
+  }
+  .case .detail ul { margin: 0 0 18px; padding-left: 1.05rem; font-size: 0.95rem; line-height: 1.7; max-width: 60ch; }
+
+  .metrics { display: flex; flex-wrap: wrap; gap: 26px; margin: 16px 0 0; padding: 0; list-style: none; }
+  .metrics div { min-width: 88px; }
+  .metrics dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; margin-bottom: 4px; }
+  .metrics dd { margin: 0; font-family: var(--serif); font-size: 1.7rem; line-height: 1; letter-spacing: -0.02em; }
+
+  /* ---------- Experiencia ---------- */
+
+  .job { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: clamp(16px, 3vw, 44px); padding-bottom: clamp(30px, 6vh, 60px); }
+  .job + .job { padding-top: clamp(28px, 5vh, 54px); border-top: 1px solid var(--rule); }
+
+  .when { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; margin: 0 0 12px; color: var(--accent); }
+  .org { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 2.8vw, 2.4rem); line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 8px; }
   .role { margin: 0; font-size: 0.95rem; opacity: 0.72; }
 
   .roles { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
   .roles p { margin: 0; font-size: 0.95rem; }
-  .roles .sub {
-    margin: 3px 0 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    opacity: 0.72;
-  }
+  .roles .sub { margin: 3px 0 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; opacity: 0.72; }
 
-  .quote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-    line-height: 1.45;
-    margin: 0 0 20px;
-    max-width: 40ch;
-    text-wrap: pretty;
-  }
+  .quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.45; margin: 0 0 20px; max-width: 40ch; text-wrap: pretty; }
 
   .body { font-size: 1rem; line-height: 1.65; margin: 0 0 16px; max-width: 54ch; text-wrap: pretty; }
   .body:last-of-type { margin-bottom: 0; }
   .body.dim { opacity: 0.8; }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; padding: 0; list-style: none; }
-  .tags li {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    border: 1px solid oklch(0.24 0.012 60 / 0.22);
-    padding: 6px 9px;
-  }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; padding: 0; list-style: none; }
+  .tags li { font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em; border: 1px solid oklch(0.24 0.012 60 / 0.22); padding: 6px 9px; }
 
-  .panel {
-    background: var(--panel);
-    padding: clamp(24px, 4vw, 44px);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-    gap: clamp(20px, 3vw, 44px);
-  }
-  .panel h3 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
-    line-height: 1.1;
-    letter-spacing: -0.015em;
-    margin: 0 0 10px;
-  }
+  /* ---------- Stack ---------- */
 
-  .grid3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: clamp(24px, 3vw, 44px);
-  }
+  .stack { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .stack > div { display: grid; grid-template-columns: minmax(120px, 180px) 1fr; gap: clamp(14px, 3vw, 36px); padding: 16px 0; border-bottom: 1px solid var(--rule); align-items: start; }
+  .stack dt { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; padding-top: 4px; }
+  .stack dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack dd span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; border: 1px solid oklch(0.24 0.012 60 / 0.22); padding: 5px 8px; }
+
+  /* ---------- Formación ---------- */
+
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: clamp(24px, 3vw, 44px); }
   .grid3 .school { margin: 0 0 6px; font-size: 1.05rem; }
   .grid3 .detail { margin: 0; font-size: 0.95rem; line-height: 1.55; opacity: 0.78; }
 
-  .extras {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: clamp(24px, 3vw, 44px);
-    margin-top: clamp(32px, 5vh, 56px);
-    border-top: 1px solid var(--rule);
-    padding-top: 24px;
-  }
-  .extras .label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin: 0 0 14px;
-    opacity: 0.72;
-  }
+  .extras { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: clamp(24px, 3vw, 44px); margin-top: clamp(28px, 4vh, 48px); border-top: 1px solid var(--rule); padding-top: 24px; }
+  .extras .label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 14px; opacity: 0.72; }
   .extras p:not(.label) { margin: 0; font-size: 0.95rem; line-height: 1.7; }
 
-  /* ---------- Cierre ---------- */
+  /* ---------- Cierre y formulario ---------- */
 
   #contacto { background: var(--ink); color: var(--paper); }
-  #contacto .inner {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: clamp(56px, 12vh, 130px) clamp(20px, 4vw, 56px) clamp(28px, 4vh, 48px);
-  }
-  #contacto h2 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(1.7rem, 4vw, 3.2rem);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
-    margin: 0;
-    max-width: 26ch;
-    text-wrap: pretty;
-  }
-  #contacto .bigmail {
-    display: inline-block;
-    margin-top: clamp(26px, 5vh, 48px);
-    font-family: var(--serif);
-    font-size: clamp(1.2rem, 2.6vw, 2.1rem);
+  #contacto .inner { max-width: 1320px; margin: 0 auto; padding: clamp(48px, 10vh, 110px) clamp(20px, 4vw, 56px) clamp(28px, 4vh, 48px); }
+  #contacto h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(1.7rem, 4vw, 3.2rem); line-height: 1.12; letter-spacing: -0.015em; margin: 0; max-width: 26ch; text-wrap: pretty; }
+  #contacto .sub { font-size: 1rem; line-height: 1.65; max-width: 52ch; margin: 18px 0 0; opacity: 0.78; }
+
+  .formwrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(28px, 5vw, 64px); margin-top: clamp(32px, 6vh, 60px); align-items: start; }
+
+  .field { display: block; margin-bottom: 16px; }
+  /* :where() deja este selector a especificidad 0 para que las reglas de idioma ganen */
+  .field > :where(span) { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; font: inherit; font-size: 0.95rem;
+    background: oklch(0.982 0.004 70 / 0.06);
     color: var(--paper);
-    background: none;
-    border: 0;
-    border-bottom: 1px solid oklch(0.982 0.004 70 / 0.45);
-    padding: 0 0 4px;
-    cursor: pointer;
+    border: 1px solid oklch(0.982 0.004 70 / 0.28);
+    padding: 11px 12px; border-radius: 0;
+  }
+  .field textarea { min-height: 108px; resize: vertical; }
+  .field select option { color: #1a1a1a; background: #fff; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid oklch(0.78 0.13 45); outline-offset: 1px; border-color: transparent; }
+  .field input::placeholder, .field textarea::placeholder { color: oklch(0.982 0.004 70 / 0.4); }
+
+  .formnote { font-family: var(--mono); font-size: 11px; line-height: 1.7; letter-spacing: 0.03em; opacity: 0.62; margin: 12px 0 0; }
+  #formstatus { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.05em; margin: 12px 0 0; min-height: 1.2em; color: oklch(0.86 0.1 48); }
+
+  .directbox { border: 1px solid oklch(0.982 0.004 70 / 0.22); padding: clamp(20px, 3vw, 30px); }
+  .directbox .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.62; margin: 0 0 14px; }
+  #contacto .bigmail {
+    display: inline-block; font-family: var(--serif); font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+    color: var(--paper); background: none; border: 0;
+    border-bottom: 1px solid oklch(0.982 0.004 70 / 0.45); padding: 0 0 4px; cursor: pointer;
   }
   #contacto .bigmail:hover { border-color: oklch(0.78 0.13 45); color: oklch(0.86 0.1 48); }
-  #contacto .links { display: flex; flex-wrap: wrap; gap: 26px; margin-top: clamp(34px, 7vh, 70px); }
-  #contacto .links a, #contacto .links button {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: oklch(0.982 0.004 70 / 0.82);
-    background: none;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
+  .copybtn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: none; border: 1px solid oklch(0.982 0.004 70 / 0.3); color: oklch(0.982 0.004 70 / 0.85);
+    padding: 8px 12px; cursor: pointer; margin-top: 18px;
   }
-  #contacto .links a:hover, #contacto .links button:hover { color: var(--paper); }
+  .copybtn:hover { border-color: var(--paper); color: var(--paper); }
+  .directlist { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; }
+  .directlist a { color: oklch(0.982 0.004 70 / 0.85); border-bottom: 1px solid oklch(0.982 0.004 70 / 0.3); padding-bottom: 2px; width: fit-content; }
+  .directlist a:hover { color: var(--paper); border-color: var(--paper); }
+
   #contacto .foot {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: clamp(44px, 9vh, 96px);
-    padding-top: 18px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
+    margin-top: clamp(40px, 8vh, 84px); padding-top: 18px;
     border-top: 1px solid oklch(0.982 0.004 70 / 0.2);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: oklch(0.982 0.004 70 / 0.7);
   }
-  #contacto .todo {
-    border-color: oklch(0.982 0.004 70 / 0.4);
-    background: oklch(0.982 0.004 70 / 0.06);
-    color: oklch(0.982 0.004 70 / 0.85);
-  }
+  #contacto .todo { border-color: oklch(0.982 0.004 70 / 0.4); background: oklch(0.982 0.004 70 / 0.06); color: oklch(0.982 0.004 70 / 0.85); }
 
   /* ---------- Idioma ---------- */
 
@@ -442,6 +339,9 @@
 
   @media (max-width: 900px) {
     .rail { position: static; min-width: 0; flex-basis: 100%; }
+    .railnav { flex-direction: row; flex-wrap: wrap; gap: 6px 18px; }
+    .railnav a { border-left: 0; padding-left: 0; margin-left: 0; border-bottom: 2px solid transparent; }
+    .railnav a[aria-current="true"] { border-left-color: transparent; border-bottom-color: var(--accent); }
   }
 
   @media (max-width: 480px) {
@@ -449,10 +349,12 @@
     .name { font-size: 2rem; }
     .lede { font-size: 1.5rem; }
     .org { font-size: 1.45rem; }
+    .stack > div { grid-template-columns: 1fr; gap: 8px; }
     #contacto .inner { padding-left: 18px; padding-right: 18px; }
-    #contacto .bigmail { font-size: 1.1rem; }
     #contacto .foot { flex-direction: column; gap: 8px; }
-    .tags li { font-size: 10px; padding: 5px 7px; }
+    .tags li, .stack dd span { font-size: 10px; padding: 5px 7px; }
+    .metrics { gap: 18px; }
+    .metrics dd { font-size: 1.4rem; }
   }
 
   /* ---------- Impresión: Ctrl+P genera el CV ---------- */
@@ -460,33 +362,17 @@
   @media print {
     @page { margin: 15mm 14mm; }
 
-    html, body {
-      background: #fff !important;
-      color: #000 !important;
-      font-size: 10pt;
-    }
+    html, body { background: #fff !important; color: #000 !important; font-size: 10pt; }
 
-    .skip, .railnav, .langbar, .btn, .todo, .no-print { display: none !important; }
+    .skip, .railnav, .langbar, .btn, .todo, .no-print,
+    .card h3 .chev, .case .open-hint, form, .copybtn, #formstatus, .formnote { display: none !important; }
 
-    .shell {
-      display: block;
-      max-width: none;
-      padding: 0;
-    }
+    .shell { display: block; max-width: none; padding: 0; }
 
-    .rail {
-      position: static;
-      display: block;
-      margin-bottom: 14pt;
-      padding-bottom: 8pt;
-      border-bottom: 1px solid #000;
-      break-inside: avoid;
-    }
+    .rail { position: static; display: block; margin-bottom: 12pt; padding-bottom: 8pt; border-bottom: 1px solid #000; break-inside: avoid; }
     .rail > * + * { margin-top: 6pt; }
-
     .name { font-size: 20pt; margin-bottom: 4pt; }
     .kicker, .place { color: #000 !important; opacity: 1; font-size: 8.5pt; }
-
     .railcontact { border: 0; padding-top: 6pt; gap: 2pt; }
     .railcontact a, .railcontact .mail { border: 0; padding: 0; }
 
@@ -494,50 +380,70 @@
 
     .eyebrow { color: #000 !important; opacity: 1; font-size: 8.5pt; margin-bottom: 8pt; }
     .lede { font-size: 13pt; max-width: none; margin-bottom: 8pt; }
-    .prose, .body, .prose.dim, .body.dim { max-width: none; opacity: 1; font-size: 9.5pt; line-height: 1.4; margin-bottom: 5pt; }
+    .prose, .body, .prose.dim, .body.dim, .case .sum { max-width: none; opacity: 1; font-size: 9.5pt; line-height: 1.4; margin-bottom: 5pt; }
     .quote { font-size: 10.5pt; max-width: none; margin-bottom: 6pt; }
 
     .band { border-top: 1px solid #000; padding-top: 10pt; margin-top: 10pt; }
 
-    .job, .panel, .grid3, .extras {
-      display: block;
-      break-inside: avoid;
-      page-break-inside: avoid;
-      padding: 0;
-      margin-bottom: 10pt;
-      gap: 0;
-    }
+    .figure { break-inside: avoid; margin-top: 8pt; }
+    .figure svg { max-height: 60mm; }
+    .dg-box { fill: #fff; stroke: #666; }
+    .dg-fill { fill: #eee; stroke: #666; }
+    .dg-line { stroke: #666; }
+    .dg-t, .dg-t.sm, .dg-t.ac { fill: #000; }
+
+    .cards { display: block; border: 0; background: none; }
+    .card { padding: 0 0 8pt; background: none !important; break-inside: avoid; }
+    .card svg { display: none; }
+    .card h3 { font-size: 11pt; margin: 0 0 3pt; display: block; }
+    .card .pitch { font-size: 9pt; opacity: 1; }
+    .card .more { margin-top: 4pt; padding-top: 4pt; border-color: #ccc; }
+    .card .more ul { font-size: 9pt; }
+
+    .case { break-inside: avoid; page-break-inside: avoid; padding: 8pt 0; border-color: #999; }
+    .case h3 { font-size: 12pt; margin: 3pt 0 5pt; }
+    .case .sector { color: #000 !important; font-size: 8.5pt; }
+    .case .detail { margin-top: 6pt; padding-top: 6pt; border-color: #ccc; }
+    .case .detail ul { font-size: 9pt; line-height: 1.45; max-width: none; margin-bottom: 8pt; }
+    .metrics { gap: 16pt; margin-top: 6pt; }
+    .metrics dd { font-size: 13pt; }
+    .metrics dt { font-size: 7.5pt; opacity: 1; }
+
+    .job, .grid3, .extras { display: block; break-inside: avoid; page-break-inside: avoid; padding: 0; margin-bottom: 10pt; gap: 0; }
     .job + .job { border-top: 1px solid #bbb; padding-top: 8pt; }
     .grid3 > div, .extras > div { break-inside: avoid; margin-bottom: 8pt; }
-
     section { break-inside: avoid; page-break-inside: avoid; }
 
     .when { color: #000 !important; font-size: 8.5pt; margin-bottom: 3pt; }
     .org { font-size: 12pt; margin-bottom: 2pt; }
     .roles { margin-top: 6pt; gap: 4pt; }
 
-    .tags { margin-top: 6pt; gap: 4pt; }
-    .tags li { border: 1px solid #999; font-size: 8pt; padding: 2pt 4pt; }
-
-    .panel { background: none !important; border: 1px solid #999; padding: 8pt; }
+    .tags, .stack dd { margin-top: 5pt; gap: 4pt; }
+    .tags li, .stack dd span { border: 1px solid #999; font-size: 8pt; padding: 2pt 4pt; }
+    .stack > div { grid-template-columns: 110px 1fr; padding: 5pt 0; border-color: #ccc; }
+    .stack dt { font-size: 8pt; opacity: 1; }
 
     #contacto { background: none !important; color: #000 !important; break-inside: avoid; }
     #contacto .inner { padding: 10pt 0 0; }
     #contacto h2 { font-size: 12pt; max-width: none; }
-    #contacto .bigmail { color: #000 !important; font-size: 11pt; border: 0; margin-top: 6pt; }
-    #contacto .links { margin-top: 8pt; gap: 14pt; }
-    #contacto .links a { color: #000 !important; font-size: 8.5pt; }
+    #contacto .sub { font-size: 9pt; opacity: 1; }
+    .formwrap { display: block; margin-top: 8pt; }
+    .directbox { border: 0; padding: 0; }
+    .directbox .label { color: #000 !important; opacity: 1; font-size: 8pt; }
+    #contacto .bigmail { color: #000 !important; font-size: 11pt; border: 0; }
+    .directlist { margin-top: 6pt; gap: 3pt; }
+    .directlist a { color: #000 !important; border: 0; }
     #contacto .foot { margin-top: 10pt; color: #000 !important; border-top: 1px solid #000; font-size: 8pt; }
 
     a { color: #000 !important; text-decoration: none; }
+
+    /* Todo desplegado en el PDF */
+    details > *:not(summary) { display: block !important; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after {
-      transition: none !important;
-      animation: none !important;
-    }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
@@ -555,10 +461,13 @@
     </div>
 
     <nav class="railnav" aria-label="Secciones">
-      <a href="#sobre"><span data-lang="es">01 · Sobre mí</span><span data-lang="en">01 · About</span></a>
-      <a href="#experiencia"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></a>
-      <a href="#proyecto"><span data-lang="es">03 · Proyecto destacado</span><span data-lang="en">03 · Featured project</span></a>
-      <a href="#formacion"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></a>
+      <a href="#sobre"><span data-lang="es">00 · Perfil</span><span data-lang="en">00 · Profile</span></a>
+      <a href="#servicios"><span data-lang="es">01 · Servicios</span><span data-lang="en">01 · Services</span></a>
+      <a href="#casos"><span data-lang="es">02 · Casos</span><span data-lang="en">02 · Case studies</span></a>
+      <a href="#experiencia"><span data-lang="es">03 · Experiencia</span><span data-lang="en">03 · Experience</span></a>
+      <a href="#stack"><span data-lang="es">04 · Stack</span><span data-lang="en">04 · Stack</span></a>
+      <a href="#formacion"><span data-lang="es">05 · Formación</span><span data-lang="en">05 · Education</span></a>
+      <a href="#contacto"><span data-lang="es">06 · Contacto</span><span data-lang="en">06 · Contact</span></a>
     </nav>
 
     <div class="railcontact">
@@ -567,6 +476,10 @@
       </button>
       <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
     </div>
+
+    <a class="btn solid" href="#contacto">
+      <span data-lang="es">Cuéntame tu proyecto</span><span data-lang="en">Tell me about your project</span>
+    </a>
 
     <button type="button" class="btn" data-print>
       <span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span>
@@ -581,21 +494,410 @@
 
   <main>
 
+    <!-- ============ 00 · PERFIL ============ -->
     <section id="sobre">
       <div data-lang="es">
-        <h2 class="lede">Ingeniero de sistemas cloud. Desde 2021 administro y optimizo infraestructuras Linux y Windows, entornos Citrix y Azure, y automatizo su gestión.</h2>
-        <p class="prose">Compagino el trabajo en una empresa de servicios cloud con el Grado en Ingeniería Informática de Gestión y Sistemas de Información en Tecnocampus. Antes cursé el ciclo superior de Administración de Sistemas Informáticos en Red con perfil de ciberseguridad.</p>
-        <p class="prose dim">Trabajo con Java y Python, HTML y CSS, bases de datos MySQL, sistemas Linux y Windows con Active Directory, virtualización con Citrix y soluciones en Microsoft Azure.</p>
+        <h2 class="lede">Diseño, despliego y opero infraestructura Azure y Microsoft&nbsp;365 para empresas que no tienen un departamento de sistemas.</h2>
+        <p class="prose">Escritorio remoto con Azure Virtual Desktop, identidad híbrida entre Active Directory y Entra ID, y todo el entorno definido como código en Bicep para poder reconstruirlo, revisarlo y repetirlo. Desde 2021 en infraestructuras Linux y Windows.</p>
+        <p class="prose dim">Trabajo desde Barcelona, en remoto o presencial. Hablo con quien firma el presupuesto y con quien usa el equipo cada mañana, que casi nunca son la misma persona.</p>
       </div>
       <div data-lang="en">
-        <h2 class="lede">Cloud systems engineer. Since 2021 I have managed and optimised Linux and Windows infrastructures, Citrix and Azure environments, and automated their operation.</h2>
-        <p class="prose">I combine work at a cloud services company with a degree in Computer Engineering of Management and Information Systems at Tecnocampus. Before that I completed a higher vocational degree in network systems administration with a cybersecurity profile.</p>
-        <p class="prose dim">I work with Java and Python, HTML and CSS, MySQL databases, Linux and Windows systems with Active Directory, Citrix virtualisation and Microsoft Azure solutions.</p>
+        <h2 class="lede">I design, deploy and run Azure and Microsoft&nbsp;365 infrastructure for companies without an in-house IT department.</h2>
+        <p class="prose">Remote desktop with Azure Virtual Desktop, hybrid identity between Active Directory and Entra ID, and the whole environment defined as code in Bicep so it can be rebuilt, reviewed and repeated. Working with Linux and Windows infrastructure since 2021.</p>
+        <p class="prose dim">Based in Barcelona, remote or on site. I talk both to the person signing the budget and to the person using the machine every morning — rarely the same person.</p>
       </div>
+
+      <figure class="figure">
+        <svg viewBox="0 0 900 340" role="img" aria-labelledby="dgtitle dgdesc">
+          <title id="dgtitle">Arquitectura de escritorio remoto híbrido en Azure</title>
+          <desc id="dgdesc">Los usuarios se conectan a un grupo de session hosts de Azure Virtual Desktop. Un controlador de dominio en Azure sincroniza con Entra ID mediante Entra Connect. Los perfiles se guardan con FSLogix en Azure Files, autenticado con Entra Kerberos. Todo el entorno se define en Bicep.</desc>
+
+          <!-- Usuarios -->
+          <g>
+            <rect class="dg-box" x="8" y="120" width="128" height="86" rx="2"/>
+            <rect class="dg-line" x="32" y="142" width="34" height="24" rx="1"/>
+            <rect class="dg-line" x="78" y="142" width="34" height="24" rx="1"/>
+            <path class="dg-line" d="M40 176h16M86 176h16"/>
+            <text class="dg-t" x="72" y="196" text-anchor="middle">Usuarios</text>
+          </g>
+          <path class="dg-line" d="M136 163h56" stroke-dasharray="3 3"/>
+          <path class="dg-line" d="M186 158l8 5-8 5z" fill="oklch(0.24 0.012 60 / 0.45)"/>
+
+          <!-- Caja Azure -->
+          <rect class="dg-line" x="200" y="18" width="560" height="304" rx="3" stroke-dasharray="2 4"/>
+          <text class="dg-t sm" x="216" y="38">MICROSOFT AZURE</text>
+
+          <!-- Host pool -->
+          <rect class="dg-fill" x="222" y="112" width="228" height="106" rx="2"/>
+          <text class="dg-t ac" x="236" y="134">Host pool · AVD</text>
+          <g class="dg-line">
+            <rect x="236" y="146" width="18" height="18"/><rect x="260" y="146" width="18" height="18"/>
+            <rect x="284" y="146" width="18" height="18"/><rect x="308" y="146" width="18" height="18"/>
+            <rect x="332" y="146" width="18" height="18"/><rect x="356" y="146" width="18" height="18"/>
+            <rect x="380" y="146" width="18" height="18"/><rect x="404" y="146" width="18" height="18"/>
+            <rect x="236" y="170" width="18" height="18"/><rect x="260" y="170" width="18" height="18"/>
+            <rect x="284" y="170" width="18" height="18"/><rect x="308" y="170" width="18" height="18"/>
+            <rect x="332" y="170" width="18" height="18"/><rect x="356" y="170" width="18" height="18"/>
+            <rect x="380" y="170" width="18" height="18"/><rect x="404" y="170" width="18" height="18"/>
+          </g>
+          <text class="dg-t sm" x="236" y="206">session hosts · Hybrid Azure AD Join</text>
+
+          <!-- DC -->
+          <rect class="dg-box" x="222" y="42" width="196" height="52" rx="2"/>
+          <text class="dg-t" x="236" y="63">Controlador de dominio</text>
+          <text class="dg-t sm" x="236" y="80">AD DS en Azure</text>
+
+          <!-- Entra ID -->
+          <rect class="dg-box" x="546" y="42" width="196" height="52" rx="2"/>
+          <text class="dg-t" x="560" y="63">Entra ID · Microsoft 365</text>
+          <text class="dg-t sm" x="560" y="80">identidad en la nube</text>
+
+          <!-- Sync -->
+          <path class="dg-line" d="M418 68h120"/>
+          <path class="dg-line" d="M532 63l8 5-8 5z" fill="oklch(0.24 0.012 60 / 0.45)"/>
+          <path class="dg-line" d="M424 63l-8 5 8 5z" fill="oklch(0.24 0.012 60 / 0.45)"/>
+          <rect x="440" y="60" width="76" height="16" fill="oklch(0.982 0.004 70)"/>
+          <text class="dg-t sm ac" x="478" y="72" text-anchor="middle">Entra Connect</text>
+
+          <!-- Azure Files -->
+          <rect class="dg-box" x="546" y="112" width="196" height="106" rx="2"/>
+          <text class="dg-t" x="560" y="134">Azure Files</text>
+          <text class="dg-t sm" x="560" y="152">perfiles FSLogix</text>
+          <text class="dg-t sm" x="560" y="168">unidad de red al inicio</text>
+          <text class="dg-t sm ac" x="560" y="192">Entra Kerberos</text>
+          <path class="dg-line" d="M450 165h88"/>
+          <path class="dg-line" d="M532 160l8 5-8 5z" fill="oklch(0.24 0.012 60 / 0.45)"/>
+
+          <!-- Bicep -->
+          <rect class="dg-fill" x="222" y="248" width="520" height="52" rx="2"/>
+          <text class="dg-t ac" x="236" y="270">Infraestructura como código · Bicep</text>
+          <text class="dg-t sm" x="236" y="288">red · Key Vault · almacenamiento · DC · host pool — validado con what-if</text>
+
+          <!-- Conexión host pool -> bicep -->
+          <path class="dg-line" d="M336 218v30" stroke-dasharray="3 3"/>
+          <path class="dg-line" d="M636 218v30" stroke-dasharray="3 3"/>
+        </svg>
+        <figcaption data-lang="es">Arquitectura de referencia de los despliegues de escritorio remoto híbrido: dominio en Azure, identidad sincronizada con Entra ID, perfiles en Azure Files y el entorno completo definido en Bicep.</figcaption>
+        <figcaption data-lang="en">Reference architecture for hybrid remote desktop deployments: domain in Azure, identity synced to Entra ID, profiles on Azure Files and the whole environment defined in Bicep.</figcaption>
+      </figure>
     </section>
 
+    <!-- ============ 01 · SERVICIOS ============ -->
+    <section id="servicios" class="band">
+      <p class="eyebrow"><span data-lang="es">01 · Servicios</span><span data-lang="en">01 · Services</span></p>
+
+      <div class="cards">
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="13" rx="1.5"/><path d="M8 21h8M12 17v4"/><path d="M6 8h5M6 11h8"/>
+            </svg>
+            <h3><span data-lang="es">Escritorio remoto (AVD)</span><span data-lang="en">Remote desktop (AVD)</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">Azure Virtual Desktop de extremo a extremo: del dimensionado del host pool al perfil que se abre igual en cualquier equipo.</p>
+            <p class="pitch" data-lang="en">Azure Virtual Desktop end to end: from host pool sizing to a profile that opens the same on any machine.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Diseño y dimensionado del host pool, con plan de escalado para apagar lo que no se usa</li>
+              <li>Imagen base con el software sectorial ya instalado y validado</li>
+              <li>Perfiles con FSLogix sobre Azure Files, autenticados con Entra Kerberos</li>
+              <li>Hybrid Azure AD Join y unidades de red mapeadas al inicio de sesión</li>
+              <li>Publicación de aplicaciones y grupos de acceso</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Host pool design and sizing, with a scaling plan that powers down what nobody is using</li>
+              <li>Golden image with the line-of-business software already installed and validated</li>
+              <li>FSLogix profiles on Azure Files, authenticated with Entra Kerberos</li>
+              <li>Hybrid Azure AD Join and network drives mapped at sign-in</li>
+              <li>Application publishing and access groups</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.4"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/><path d="M18 4.5l2.4 2.4M20.4 4.5L18 6.9"/>
+            </svg>
+            <h3><span data-lang="es">Identidad híbrida</span><span data-lang="en">Hybrid identity</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">Un usuario, una contraseña. Active Directory y Entra ID sincronizados sin duplicados ni cuentas huérfanas.</p>
+            <p class="pitch" data-lang="en">One user, one password. Active Directory and Entra ID in sync, without duplicates or orphan accounts.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Controlador de dominio en Azure o extensión del bosque existente</li>
+              <li>Entra Connect con sincronización de hash de contraseña y estructura de OUs</li>
+              <li>Resolución de conflictos de UPN y sufijos para que el soft-match funcione</li>
+              <li>Auditoría de cuentas que no sincronizan y por qué</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Domain controller in Azure, or extension of the existing forest</li>
+              <li>Entra Connect with password hash sync and a proper OU structure</li>
+              <li>UPN and suffix conflict resolution so soft-match actually works</li>
+              <li>Audit of accounts that fail to sync, and why</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M8.5 7.5L4 12l4.5 4.5M15.5 7.5L20 12l-4.5 4.5M13.6 4.6l-3.2 14.8"/>
+            </svg>
+            <h3><span data-lang="es">Infraestructura como código</span><span data-lang="en">Infrastructure as code</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">El entorno entero en Bicep, versionado en Git. Se revisa antes de aplicarse y se puede volver a levantar desde cero.</p>
+            <p class="pitch" data-lang="en">The whole environment in Bicep, versioned in Git. Reviewed before it is applied, and rebuildable from scratch.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Plantillas Bicep modulares: red, Key Vault, almacenamiento, máquinas y extensiones</li>
+              <li>Validación con <span class="mono">what-if</span> antes de cada despliegue</li>
+              <li>Secretos generados y guardados en Key Vault, nunca en el repositorio</li>
+              <li>Documentación de despliegue para que no dependa de mí</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Modular Bicep templates: network, Key Vault, storage, VMs and extensions</li>
+              <li><span class="mono">what-if</span> validation before every deployment</li>
+              <li>Secrets generated and stored in Key Vault, never in the repository</li>
+              <li>Deployment documentation, so it does not depend on me</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M6.5 18a4 4 0 01-.5-7.97 5.5 5.5 0 0110.7-1.8A3.8 3.8 0 0121 12a3.9 3.9 0 01-3.4 4z"/><path d="M12 12v6M9.5 15.5L12 18l2.5-2.5"/>
+            </svg>
+            <h3><span data-lang="es">Microsoft 365</span><span data-lang="en">Microsoft 365</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">Migración desde servidores propios y, después, saber de verdad qué hay dentro del tenant.</p>
+            <p class="pitch" data-lang="en">Migration off on-premises servers and, afterwards, actually knowing what is inside the tenant.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Migración de correo y ficheros a Microsoft 365 planificada por lotes</li>
+              <li>Inventario completo del tenant con Microsoft Graph: identidad, grupos, Teams, licencias</li>
+              <li>Registro de aplicación con consentimiento de administrador y ejecución desatendida</li>
+              <li>Informe de lo que sobra: licencias sin usar, grupos huérfanos, permisos de más</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Mail and file migration to Microsoft 365, planned in batches</li>
+              <li>Full tenant inventory with Microsoft Graph: identity, groups, Teams, licensing</li>
+              <li>App registration with admin consent and unattended execution</li>
+              <li>A report on what is surplus: unused licences, orphan groups, excess permissions</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h9"/><circle cx="18.5" cy="18" r="2.2"/>
+            </svg>
+            <h3><span data-lang="es">Automatización</span><span data-lang="en">Automation</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">Si hay que hacerlo en cincuenta máquinas, no se hace a mano. Piloto, verificación y despliegue por lotes.</p>
+            <p class="pitch" data-lang="en">If it has to happen on fifty machines, it does not happen by hand. Pilot, verify, then roll out in batches.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Scripting en PowerShell, Bash y Python</li>
+              <li>Ejecución remota como SYSTEM sobre flotas de máquinas con Run Command</li>
+              <li>Instalación desatendida de software, incluido el que no quiere dejarse instalar</li>
+              <li>Ansible para la parte Linux</li>
+              <li>Método: piloto en un equipo, verificación contra la referencia, prueba en seco y despliegue</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Scripting in PowerShell, Bash and Python</li>
+              <li>Remote execution as SYSTEM across machine fleets with Run Command</li>
+              <li>Unattended software installation, including the software that resists it</li>
+              <li>Ansible for the Linux side</li>
+              <li>Method: pilot on one machine, verify against the reference, dry run, then roll out</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M3 14l4.5-5 3.5 3.5L15 7l3 4"/><path d="M3 19h18"/><path d="M3 5v14"/>
+            </svg>
+            <h3><span data-lang="es">Monitorización y continuidad</span><span data-lang="en">Monitoring and continuity</span><span class="chev" aria-hidden="true">+</span></h3>
+            <p class="pitch" data-lang="es">Enterarse de que algo va mal antes de que llame el cliente, y poder recuperarlo cuando ya ha pasado.</p>
+            <p class="pitch" data-lang="en">Finding out something is wrong before the client calls, and being able to recover once it has happened.</p>
+          </summary>
+          <div class="more">
+            <ul data-lang="es">
+              <li>Cuadros de mando, alertas y triggers en Grafana y Zabbix</li>
+              <li>Copias con Veeam y pruebas de restauración de verdad</li>
+              <li>Seguridad de endpoint con SentinelOne</li>
+              <li>Detección proactiva: alertas por tendencia, no solo por caída</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Dashboards, alerts and triggers in Grafana and Zabbix</li>
+              <li>Veeam backups and restore tests that are actually run</li>
+              <li>Endpoint security with SentinelOne</li>
+              <li>Proactive detection: alerting on trends, not only on outages</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+
+      <p class="todo">[[PENDIENTE: forma de trabajo y precios. ¿Proyecto cerrado, bolsa de horas, retainer mensual? ¿Das una horquilla de precio o prefieres «hablamos»? Ahora mismo no aparece nada.]]</p>
+      <p class="todo">[[PENDIENTE: ¿facturas como autónomo? Si vas a vender servicios desde aquí necesitas al menos un aviso legal y una política de privacidad, sobre todo con el formulario de contacto. Dime y los redacto.]]</p>
+    </section>
+
+    <!-- ============ 02 · CASOS ============ -->
+    <section id="casos" class="band">
+      <p class="eyebrow"><span data-lang="es">02 · Casos</span><span data-lang="en">02 · Case studies</span></p>
+
+      <details class="case">
+        <summary>
+          <p class="sector"><span data-lang="es">Despacho profesional · ~50 usuarios</span><span data-lang="en">Professional practice · ~50 users</span></p>
+          <h3><span data-lang="es">Escritorio remoto híbrido montado desde cero</span><span data-lang="en">Hybrid remote desktop built from scratch</span></h3>
+          <p class="sum" data-lang="es">Un despacho sin infraestructura propia en la nube pasa a trabajar íntegramente sobre escritorios remotos en Azure, con su dominio, sus perfiles y su unidad de red de siempre.</p>
+          <p class="sum" data-lang="en">A practice with no cloud infrastructure moves entirely onto Azure remote desktops, keeping its domain, its profiles and the network drive everyone was used to.</p>
+          <dl class="metrics">
+            <div><dt data-lang="es">Session hosts</dt><dt data-lang="en">Session hosts</dt><dd>50</dd></div>
+            <div><dt data-lang="es">Usuarios híbridos</dt><dt data-lang="en">Hybrid users</dt><dd>~50</dd></div>
+            <div><dt data-lang="es">Entorno en Bicep</dt><dt data-lang="en">Defined in Bicep</dt><dd>100%</dd></div>
+          </dl>
+          <p class="open-hint" data-lang="es">+ Ver detalle</p>
+          <p class="open-hint" data-lang="en">+ See detail</p>
+        </summary>
+        <div class="detail">
+          <div data-lang="es">
+            <h4>Qué se hizo</h4>
+            <ul>
+              <li>Bosque nuevo sobre un controlador de dominio desplegado en Azure, promovido automáticamente por la extensión de la máquina.</li>
+              <li>Entra Connect con sincronización de hash de contraseña: unos 50 usuarios híbridos repartidos en OUs de sincronización y de AVD.</li>
+              <li>50 session hosts con Hybrid Azure AD Join, Microsoft 365, Adobe Reader y FSLogix en la imagen.</li>
+              <li>Azure Files autenticado con Entra Kerberos y la unidad de red montada sola al iniciar sesión, sin pedir credenciales.</li>
+              <li>Red, Key Vault, cuenta de almacenamiento, dominio y hosts definidos en plantillas Bicep modulares, validadas con <span class="mono">what-if</span> antes de cada despliegue.</li>
+              <li>Plan de escalado que desaloja los hosts sin sesión activa.</li>
+            </ul>
+            <h4>Lo que costó de verdad</h4>
+            <ul>
+              <li>Las cuotas de vCPU en Azure van también por familia de máquina, no solo por región: la familia se agotó antes que el total. Y desalojar una máquina no libera cuota, hay que eliminarla.</li>
+              <li>El bosque interno y el dominio de correo no coincidían, así que los usuarios llevan un sufijo UPN añadido al bosque para que el soft-match empareje sin crear duplicados.</li>
+              <li>Montar Azure Files desde Run Command como SYSTEM se queda colgado; hay que hacerlo en sesión interactiva.</li>
+            </ul>
+          </div>
+          <div data-lang="en">
+            <h4>What was done</h4>
+            <ul>
+              <li>New forest on a domain controller deployed in Azure, promoted automatically by the VM extension.</li>
+              <li>Entra Connect with password hash sync: around 50 hybrid users across sync and AVD OUs.</li>
+              <li>50 session hosts with Hybrid Azure AD Join, Microsoft 365, Adobe Reader and FSLogix baked in.</li>
+              <li>Azure Files authenticated with Entra Kerberos, with the network drive mounting itself at sign-in without prompting.</li>
+              <li>Network, Key Vault, storage account, domain and hosts defined in modular Bicep templates, validated with <span class="mono">what-if</span> before each deployment.</li>
+              <li>Scaling plan that deallocates hosts with no active session.</li>
+            </ul>
+            <h4>The parts that actually hurt</h4>
+            <ul>
+              <li>Azure vCPU quota is per VM family as well as per region — the family ran out before the regional total. And deallocating a VM does not release quota; it has to be deleted.</li>
+              <li>The internal forest and the mail domain did not match, so users carry a UPN suffix added to the forest so soft-match pairs them without creating duplicates.</li>
+              <li>Mounting Azure Files from Run Command as SYSTEM hangs; it has to be done in an interactive session.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="case">
+        <summary>
+          <p class="sector"><span data-lang="es">Mismo cliente · fase de explotación</span><span data-lang="en">Same client · rollout phase</span></p>
+          <h3><span data-lang="es">Idioma y software sectorial en 50 escritorios, sin tocar ninguno a mano</span><span data-lang="en">Language and line-of-business software across 50 desktops, none touched by hand</span></h3>
+          <p class="sum" data-lang="es">Los escritorios se habían desplegado en inglés y sin la aplicación con la que trabaja el despacho. Había que corregir los cincuenta sin abrir una sesión en cada uno.</p>
+          <p class="sum" data-lang="en">The desktops had shipped in English and without the application the practice actually works in. All fifty had to be fixed without opening a session on each one.</p>
+          <dl class="metrics">
+            <div><dt data-lang="es">Hosts intervenidos</dt><dt data-lang="en">Hosts changed</dt><dd>48</dd></div>
+            <div><dt data-lang="es">A mano</dt><dt data-lang="en">By hand</dt><dd>0</dd></div>
+            <div><dt data-lang="es">Instalación</dt><dt data-lang="en">Install time</dt><dd>95 s</dd></div>
+          </dl>
+          <p class="open-hint" data-lang="es">+ Ver detalle</p>
+          <p class="open-hint" data-lang="en">+ See detail</p>
+        </summary>
+        <div class="detail">
+          <div data-lang="es">
+            <h4>Qué se hizo</h4>
+            <ul>
+              <li>Español como idioma de sistema y de la pantalla de inicio de sesión en 48 hosts, aplicado como SYSTEM vía Run Command.</li>
+              <li>Instalación silenciosa del software del sector, un instalador NSIS, con sus tres DSN ODBC contra SQL Server.</li>
+              <li>Orquestador que recorre la flota por lotes, con el host de referencia blindado para no tocarlo.</li>
+            </ul>
+            <h4>Cómo se hizo sin romper nada</h4>
+            <ul>
+              <li>Piloto en un solo host antes que nada, y validación en frío: reiniciar y comprobar que el idioma persiste, incluido el mensaje de error del sistema.</li>
+              <li>Verificación forense contra el host de referencia. La instalación silenciosa dejaba 3 ficheros frente a 28, lo que parecía un fallo. Comparando recuentos y marcas de tiempo se vio que la aplicación real —461 ficheros, 959&nbsp;MB— estaba idéntica en ambos, y que los 25 restantes eran datos que el programa copia de la red la primera vez que se abre.</li>
+              <li>Prueba en seco del orquestador sobre los 48 hosts antes de lanzarlo de verdad.</li>
+            </ul>
+          </div>
+          <div data-lang="en">
+            <h4>What was done</h4>
+            <ul>
+              <li>Spanish as the system and sign-in screen language on 48 hosts, applied as SYSTEM via Run Command.</li>
+              <li>Silent install of the sector application, an NSIS installer, with its three ODBC DSNs against SQL Server.</li>
+              <li>An orchestrator that walks the fleet in batches, with the reference host guarded so it is never touched.</li>
+            </ul>
+            <h4>How it was done without breaking anything</h4>
+            <ul>
+              <li>Pilot on a single host first, then cold validation: reboot and confirm the language persists, right down to the system error message.</li>
+              <li>Forensic verification against the reference host. The silent install left 3 files against 28, which looked like a failure. Comparing counts and timestamps showed the real application — 461 files, 959&nbsp;MB — was identical on both, and the remaining 25 were runtime data the program copies from the network the first time it opens.</li>
+              <li>Dry run of the orchestrator across all 48 hosts before firing it for real.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details class="case">
+        <summary>
+          <p class="sector"><span data-lang="es">Correduría · auditoría de tenant</span><span data-lang="en">Brokerage · tenant audit</span></p>
+          <h3><span data-lang="es">Inventario completo de un Microsoft 365 heredado</span><span data-lang="en">Full inventory of an inherited Microsoft 365</span></h3>
+          <p class="sum" data-lang="es">Un tenant que nadie había documentado. Diez bloques de scripts para sacar identidad, grupos, Teams, licencias y permisos, y saber por dónde se empieza.</p>
+          <p class="sum" data-lang="en">A tenant nobody had documented. Ten script blocks to pull identity, groups, Teams, licensing and permissions, and work out where to start.</p>
+          <dl class="metrics">
+            <div><dt data-lang="es">Bloques</dt><dt data-lang="en">Blocks</dt><dd>10</dd></div>
+            <div><dt data-lang="es">Sin consentimiento</dt><dt data-lang="en">Without consent</dt><dd>5</dd></div>
+          </dl>
+          <p class="open-hint" data-lang="es">+ Ver detalle</p>
+          <p class="open-hint" data-lang="en">+ See detail</p>
+        </summary>
+        <div class="detail">
+          <div data-lang="es">
+            <h4>Qué se hizo</h4>
+            <ul>
+              <li>Suite de scripts en PowerShell que extrae el inventario del tenant por bloques: identidad y grupos, Teams y telefonía, licencias, permisos.</li>
+              <li>Registro de aplicación con consentimiento de administrador para poder ejecutarlo desatendido por token, sin pedir sesión en cada bloque.</li>
+              <li>Ruta alternativa para los bloques que no necesitan Microsoft Graph, de modo que se pueda empezar a auditar el mismo día aunque el consentimiento tarde en aprobarse.</li>
+            </ul>
+            <h4>Detalle útil</h4>
+            <ul>
+              <li>Cinco de los diez bloques salían adelante sin Graph, apoyándose solo en los módulos de Teams. Eso permitió entregar la mitad del inventario mientras el consentimiento estaba en cola.</li>
+            </ul>
+          </div>
+          <div data-lang="en">
+            <h4>What was done</h4>
+            <ul>
+              <li>A PowerShell script suite that extracts the tenant inventory in blocks: identity and groups, Teams and voice, licensing, permissions.</li>
+              <li>App registration with admin consent so it could run unattended by token, without prompting for sign-in on every block.</li>
+              <li>A fallback path for the blocks that do not need Microsoft Graph, so auditing could start the same day even while consent was pending.</li>
+            </ul>
+            <h4>Useful detail</h4>
+            <ul>
+              <li>Five of the ten blocks ran without Graph at all, relying only on the Teams modules. That made it possible to deliver half the inventory while consent sat in the approval queue.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <p class="todo">[[PENDIENTE IMPORTANTE: estos tres casos salen de tu historial de trabajo en Claude. Los he escrito SIN nombres de cliente, sin nombres de máquina, sin dominios y sin cuentas de almacenamiento, a propósito. Antes de publicar, confirma con M&amp;G que puedes contar este trabajo aunque sea de forma anónima: el trabajo es de la consultora y de sus clientes, no tuyo.]]</p>
+      <p class="todo">[[PENDIENTE: ¿puedes dar algún dato de negocio en vez de solo técnico? Por ejemplo horas de despliegue ahorradas, tiempo de alta de un usuario nuevo, o coste mensual antes y después. Vende mucho más que el recuento de hosts.]]</p>
+    </section>
+
+    <!-- ============ 03 · EXPERIENCIA ============ -->
     <section id="experiencia" class="band">
-      <p class="eyebrow"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></p>
+      <p class="eyebrow"><span data-lang="es">03 · Experiencia</span><span data-lang="en">03 · Experience</span></p>
 
       <article class="job">
         <div>
@@ -604,8 +906,15 @@
           <p class="role">System Engineer · Barcelona</p>
         </div>
         <div>
-          <p class="todo">[[PENDIENTE: descripción del puesto en M&amp;G Corporate Consulting. El CV no incluye ninguna. 2-3 frases: qué gestionas, con qué tecnologías y para qué tipo de cliente.]]</p>
-          <p class="todo">[[PENDIENTE: lista de tecnologías reales de este puesto para las etiquetas.]]</p>
+          <p class="body" data-lang="es">Diseño, despliegue y operación de infraestructura Azure para clientes corporativos: escritorio remoto con Azure Virtual Desktop, identidad híbrida entre AD DS y Entra ID, y almacenamiento de perfiles sobre Azure Files.</p>
+          <p class="body" data-lang="en">Design, deployment and operation of Azure infrastructure for corporate clients: remote desktop with Azure Virtual Desktop, hybrid identity between AD DS and Entra ID, and profile storage on Azure Files.</p>
+          <p class="body dim" data-lang="es">Los entornos se definen como código en Bicep y se validan antes de aplicarse. La operación sobre flotas de máquinas va por scripts: instalación desatendida, cambios de configuración y auditoría de tenants Microsoft 365 con Graph.</p>
+          <p class="body dim" data-lang="en">Environments are defined as code in Bicep and validated before being applied. Fleet operations run through scripts: unattended installation, configuration changes and Microsoft 365 tenant auditing with Graph.</p>
+          <ul class="tags">
+            <li>Azure</li><li>Azure Virtual Desktop</li><li>Bicep</li><li>Entra ID</li><li>Entra Connect</li>
+            <li>FSLogix</li><li>Azure Files</li><li>Key Vault</li><li>Active Directory</li>
+            <li>PowerShell</li><li>Microsoft Graph</li><li>Microsoft 365</li><li>SQL Server</li>
+          </ul>
         </div>
       </article>
 
@@ -615,18 +924,9 @@
           <h3 class="org">beServices</h3>
           <p class="role">Barcelona · <span data-lang="es">4 años 1 mes</span><span data-lang="en">4 years 1 month</span></p>
           <ul class="roles">
-            <li>
-              <p>System Engineer</p>
-              <p class="sub">oct. 2021 — oct. 2025</p>
-            </li>
-            <li>
-              <p>System Administrator</p>
-              <p class="sub">jun. 2022 — oct. 2024</p>
-            </li>
-            <li>
-              <p>Junior System Administrator</p>
-              <p class="sub">oct. 2021 — jun. 2022</p>
-            </li>
+            <li><p>System Engineer</p><p class="sub">oct. 2021 — oct. 2025</p></li>
+            <li><p>System Administrator</p><p class="sub">jun. 2022 — oct. 2024</p></li>
+            <li><p>Junior System Administrator</p><p class="sub">oct. 2021 — jun. 2022</p></li>
           </ul>
         </div>
         <div>
@@ -645,22 +945,9 @@
             <p class="body dim">As System Administrator, managing infrastructure focused on Citrix environments, Windows servers, Veeam backup solutions and VMware virtualisation, plus migration projects within VMware and to Office 365. In the junior role, supporting server administration, network policies, automation scripts and virtual machines for internal projects.</p>
           </div>
           <ul class="tags">
-            <li>Linux</li>
-            <li>Windows Server</li>
-            <li>Active Directory</li>
-            <li>Citrix</li>
-            <li>VMware</li>
-            <li>Azure</li>
-            <li>AWS</li>
-            <li>Veeam</li>
-            <li>Ansible</li>
-            <li>Bash</li>
-            <li>PowerShell</li>
-            <li>Python</li>
-            <li>Grafana</li>
-            <li>Zabbix</li>
-            <li>SentinelOne</li>
-            <li>Office 365</li>
+            <li>Linux</li><li>Windows Server</li><li>Active Directory</li><li>Citrix</li><li>VMware</li>
+            <li>Azure</li><li>AWS</li><li>Veeam</li><li>Ansible</li><li>Bash</li><li>PowerShell</li>
+            <li>Python</li><li>Grafana</li><li>Zabbix</li><li>SentinelOne</li><li>Office 365</li>
           </ul>
         </div>
       </article>
@@ -678,21 +965,41 @@
       </article>
     </section>
 
-    <section id="proyecto" class="band">
-      <p class="eyebrow"><span data-lang="es">03 · Proyecto destacado</span><span data-lang="en">03 · Featured project</span></p>
-      <div class="panel">
+    <!-- ============ 04 · STACK ============ -->
+    <section id="stack" class="band">
+      <p class="eyebrow"><span data-lang="es">04 · Stack</span><span data-lang="en">04 · Stack</span></p>
+      <dl class="stack">
         <div>
-          <h3><span data-lang="es">Sin proyecto publicado</span><span data-lang="en">No project published yet</span></h3>
-          <p class="kicker">[[PENDIENTE]]</p>
+          <dt data-lang="es">Nube</dt><dt data-lang="en">Cloud</dt>
+          <dd><span>Microsoft Azure</span><span>Azure Virtual Desktop</span><span>Azure Files</span><span>Key Vault</span><span>Microsoft 365</span><span>AWS</span></dd>
         </div>
         <div>
-          <p class="todo">[[PENDIENTE: el CV no recoge ningún proyecto. Título real, tu rol, 2-3 frases de contexto y stack, y un resultado medible. Si tienes TFG o repositorio público, enlázalo aquí. Si no quieres esta sección, dímelo y la quito junto con su entrada de navegación.]]</p>
+          <dt data-lang="es">Identidad</dt><dt data-lang="en">Identity</dt>
+          <dd><span>Entra ID</span><span>Entra Connect</span><span>Entra Kerberos</span><span>Active Directory</span><span>Hybrid Azure AD Join</span><span>Microsoft Graph</span></dd>
         </div>
-      </div>
+        <div>
+          <dt data-lang="es">Sistemas</dt><dt data-lang="en">Systems</dt>
+          <dd><span>Windows Server</span><span>Linux</span><span>FSLogix</span><span>SQL Server</span><span>ODBC</span></dd>
+        </div>
+        <div>
+          <dt data-lang="es">Virtualización</dt><dt data-lang="en">Virtualisation</dt>
+          <dd><span>VMware</span><span>Citrix</span></dd>
+        </div>
+        <div>
+          <dt data-lang="es">Código</dt><dt data-lang="en">Code</dt>
+          <dd><span>Bicep</span><span>PowerShell</span><span>Bash</span><span>Python</span><span>Ansible</span><span>Java</span><span>HTML</span><span>CSS</span><span>MySQL</span><span>Git</span></dd>
+        </div>
+        <div>
+          <dt data-lang="es">Operación</dt><dt data-lang="en">Operations</dt>
+          <dd><span>Grafana</span><span>Zabbix</span><span>Veeam</span><span>SentinelOne</span><span>Azure Run Command</span></dd>
+        </div>
+      </dl>
+      <p class="todo">[[PENDIENTE: he montado esta lista con lo que aparece en tu CV y en tu trabajo real. Quita lo que ya no toques: poner Java o MySQL en un perfil de infraestructura puede restar más que sumar.]]</p>
     </section>
 
+    <!-- ============ 05 · FORMACIÓN ============ -->
     <section id="formacion" class="band">
-      <p class="eyebrow"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></p>
+      <p class="eyebrow"><span data-lang="es">05 · Formación</span><span data-lang="en">05 · Education</span></p>
 
       <div class="grid3">
         <div>
@@ -724,8 +1031,8 @@
         <div>
           <p class="label"><span data-lang="es">Certificaciones</span><span data-lang="en">Certifications</span></p>
           <p>B2 First — Score 179<br><span data-lang="es">Carnet de conducir B</span><span data-lang="en">Driving licence B</span></p>
-          <p class="todo">[[PENDIENTE: emisor y año del B2 First (¿Cambridge English, qué año?). El CV solo indica «B2 First – Score 179».]]</p>
-          <p class="todo">[[PENDIENTE: ¿alguna certificación técnica (AZ-104, AZ-500, SC-300…)? El CV no recoge ninguna, así que no he puesto nada.]]</p>
+          <p class="todo">[[PENDIENTE: emisor y año del B2 First. El CV solo indica «B2 First – Score 179».]]</p>
+          <p class="todo">[[PENDIENTE: si vas a vender servicios de Azure, una AZ-104 o AZ-800 en la web vale mucho. ¿Tienes alguna en curso o prevista? El CV no recoge ninguna.]]</p>
         </div>
       </div>
     </section>
@@ -733,25 +1040,84 @@
   </main>
 </div>
 
+<!-- ============ 06 · CONTACTO ============ -->
 <section id="contacto">
   <div class="inner">
     <h2>
-      <span data-lang="es">¿Un proyecto de infraestructura cloud? Hablemos.</span>
-      <span data-lang="en">Got a cloud infrastructure project? Let’s talk.</span>
+      <span data-lang="es">¿Un proyecto de infraestructura cloud? Cuéntamelo.</span>
+      <span data-lang="en">Got a cloud infrastructure project? Tell me about it.</span>
     </h2>
+    <p class="sub" data-lang="es">Escríbeme qué tienes montado ahora y qué te gustaría que pasara. Te contesto con una idea de enfoque, plazos y si soy la persona adecuada o no.</p>
+    <p class="sub" data-lang="en">Tell me what you are running today and what you would like to happen. I will come back with an approach, a rough timeline, and an honest answer on whether I am the right person.</p>
 
-    <button type="button" class="bigmail" data-mail>
-      <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
-    </button>
+    <div class="formwrap">
 
-    <div class="links">
-      <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
-      <button type="button" data-print class="no-print">
-        <span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span>
-      </button>
+      <form id="contactform" novalidate>
+        <label class="field">
+          <span data-lang="es">Nombre</span><span data-lang="en">Name</span>
+          <input type="text" name="nombre" autocomplete="name" required>
+        </label>
+
+        <label class="field">
+          <span data-lang="es">Empresa</span><span data-lang="en">Company</span>
+          <input type="text" name="empresa" autocomplete="organization">
+        </label>
+
+        <label class="field">
+          <span data-lang="es">Tu correo</span><span data-lang="en">Your email</span>
+          <input type="email" name="correo" autocomplete="email" required>
+        </label>
+
+        <label class="field">
+          <span data-lang="es">Qué necesitas</span><span data-lang="en">What you need</span>
+          <select name="asunto" id="asunto">
+            <option value="Escritorio remoto (AVD)">Escritorio remoto (AVD)</option>
+            <option value="Identidad híbrida">Identidad híbrida</option>
+            <option value="Infraestructura como código">Infraestructura como código</option>
+            <option value="Microsoft 365">Microsoft 365</option>
+            <option value="Automatización">Automatización</option>
+            <option value="Monitorización y continuidad">Monitorización y continuidad</option>
+            <option value="Otra cosa">Otra cosa</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-lang="es">Cuéntame</span><span data-lang="en">Tell me more</span>
+          <textarea name="mensaje" required></textarea>
+        </label>
+
+        <button type="submit" class="btn solid">
+          <span data-lang="es">Enviar</span><span data-lang="en">Send</span>
+        </button>
+
+        <p id="formstatus" role="status" aria-live="polite"></p>
+
+        <p class="formnote" data-lang="es">El formulario abre tu programa de correo con el mensaje ya escrito. No se envía nada a ningún servidor ni se guarda ningún dato en esta web.</p>
+        <p class="formnote" data-lang="en">The form opens your mail client with the message pre-written. Nothing is sent to a server and nothing is stored on this site.</p>
+      </form>
+
+      <div class="directbox">
+        <p class="label" data-lang="es">O directamente</p>
+        <p class="label" data-lang="en">Or directly</p>
+
+        <button type="button" class="bigmail" data-mail>
+          <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+        </button>
+
+        <br>
+        <button type="button" class="copybtn" data-copy>
+          <span data-lang="es">Copiar correo</span><span data-lang="en">Copy email</span>
+        </button>
+
+        <ul class="directlist">
+          <li><a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a></li>
+          <li><a href="#" data-print><span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span></a></li>
+        </ul>
+
+        <p class="todo" data-lang="es">[[PENDIENTE: ¿quieres un formulario de verdad que te llegue al correo sin abrir el cliente? Se puede con un servicio externo tipo Formspree sin salir de GitHub Pages. Dímelo y lo cambio, pero implica dar de alta una cuenta y añadir su aviso de privacidad.]]</p>
+      </div>
+
     </div>
-
-    <p class="todo no-print">[[PENDIENTE: confirma tu disponibilidad. He puesto un titular neutro; si estás abierto a propuestas o no lo estás, dime la frase exacta y la cambio.]]</p>
 
     <div class="foot">
       <span>Albert Polo Fernández · Barcelona</span>
@@ -764,48 +1130,141 @@
 (function () {
   "use strict";
 
-  // --- Correo ofuscado: nunca aparece un mailto: plano en el HTML servido ---
-  var u = ["albertpolfer", "gmail", "com"];
-  var addr = u[0] + String.fromCharCode(64) + u[1] + "." + u[2];
+  var root = document.documentElement;
+
+  /* ---------- Correo ofuscado: sin mailto: en el HTML servido ---------- */
+  var parts = ["albertpolfer", "gmail", "com"];
+  var addr = parts[0] + String.fromCharCode(64) + parts[1] + "." + parts[2];
+  var proto = "mai" + "lto:";
 
   Array.prototype.forEach.call(document.querySelectorAll("[data-mail]"), function (btn) {
     var label = btn.querySelector("[data-mail-text]");
     if (label) { label.textContent = addr; }
     btn.setAttribute("aria-label", "Escribir a " + addr);
-    btn.addEventListener("click", function () {
-      window.location.href = "mai" + "lto:" + addr;
+    btn.addEventListener("click", function () { window.location.href = proto + addr; });
+  });
+
+  /* ---------- Copiar correo ---------- */
+  var copyBtn = document.querySelector("[data-copy]");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      var done = function () {
+        var old = copyBtn.textContent;
+        copyBtn.textContent = root.classList.contains("en") ? "Copied" : "Copiado";
+        setTimeout(function () { copyBtn.textContent = old; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(done, done);
+      } else {
+        var t = document.createElement("textarea");
+        t.value = addr; document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(t); done();
+      }
     });
-  });
+  }
 
-  // --- Guardar en PDF ---
+  /* ---------- Guardar en PDF ---------- */
   Array.prototype.forEach.call(document.querySelectorAll("[data-print]"), function (btn) {
-    btn.addEventListener("click", function () { window.print(); });
+    btn.addEventListener("click", function (ev) { ev.preventDefault(); window.print(); });
   });
 
-  // --- Cambio de idioma ---
-  var root = document.documentElement;
+  /* ---------- Formulario: compone el correo, no envía a ningún servidor ---------- */
+  var form = document.getElementById("contactform");
+  if (form) {
+    var status = document.getElementById("formstatus");
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var en = root.classList.contains("en");
+      var d = new FormData(form);
+      var nombre = (d.get("nombre") || "").toString().trim();
+      var correo = (d.get("correo") || "").toString().trim();
+      var mensaje = (d.get("mensaje") || "").toString().trim();
+
+      if (!nombre || !correo || !mensaje) {
+        status.textContent = en
+          ? "Please fill in name, email and message."
+          : "Rellena nombre, correo y mensaje.";
+        return;
+      }
+      if (correo.indexOf("@") < 1 || correo.indexOf(".") < 0) {
+        status.textContent = en ? "That email does not look right." : "Ese correo no parece válido.";
+        return;
+      }
+
+      var empresa = (d.get("empresa") || "").toString().trim();
+      var asunto  = (d.get("asunto") || "").toString().trim();
+
+      var subject = (en ? "Project enquiry" : "Consulta de proyecto") + " — " + asunto;
+      var body = [
+        (en ? "Name" : "Nombre") + ": " + nombre,
+        (en ? "Company" : "Empresa") + ": " + (empresa || "—"),
+        (en ? "Email" : "Correo") + ": " + correo,
+        (en ? "Topic" : "Tema") + ": " + asunto,
+        "",
+        mensaje
+      ].join("\n");
+
+      status.textContent = en
+        ? "Opening your mail client…"
+        : "Abriendo tu programa de correo…";
+
+      window.location.href = proto + addr +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+    });
+  }
+
+  /* ---------- Idioma ---------- */
   var bar = document.querySelector(".langbar");
+
+  function paintLangbar(code) {
+    Array.prototype.slice.call(bar.children).forEach(function (el) {
+      var c = el.getAttribute("data-langbtn");
+      if (!c) { return; }
+      var active = c === code;
+      var next = document.createElement(active ? "span" : "button");
+      next.setAttribute("data-langbtn", c);
+      next.setAttribute("lang", c);
+      next.textContent = c.toUpperCase();
+      if (active) {
+        next.setAttribute("aria-current", "true");
+      } else {
+        next.type = "button";
+        next.addEventListener("click", function () { setLang(c); });
+      }
+      bar.replaceChild(next, el);
+    });
+  }
+
+  /* Las opciones de un <select> no se pueden ocultar con CSS de forma fiable,
+     así que se repueblan al cambiar de idioma. */
+  var TOPICS = {
+    es: ["Escritorio remoto (AVD)", "Identidad híbrida", "Infraestructura como código",
+         "Microsoft 365", "Automatización", "Monitorización y continuidad", "Otra cosa"],
+    en: ["Remote desktop (AVD)", "Hybrid identity", "Infrastructure as code",
+         "Microsoft 365", "Automation", "Monitoring and continuity", "Something else"]
+  };
+
+  function paintTopics(code) {
+    var sel = document.getElementById("asunto");
+    if (!sel) { return; }
+    var i = sel.selectedIndex < 0 ? 0 : sel.selectedIndex;
+    sel.textContent = "";
+    TOPICS[code].forEach(function (label) {
+      var o = document.createElement("option");
+      o.value = label; o.textContent = label;
+      sel.appendChild(o);
+    });
+    sel.selectedIndex = i;
+  }
 
   function setLang(code) {
     var isEn = code === "en";
     root.classList.toggle("en", isEn);
     root.lang = isEn ? "en" : "es";
-    Array.prototype.forEach.call(bar.children, function (el) {
-      var c = el.getAttribute("data-langbtn");
-      if (!c) { return; }
-      var active = c === code;
-      var span = document.createElement(active ? "span" : "button");
-      span.setAttribute("data-langbtn", c);
-      span.setAttribute("lang", c);
-      span.textContent = c.toUpperCase();
-      if (active) {
-        span.setAttribute("aria-current", "true");
-      } else {
-        span.type = "button";
-        span.addEventListener("click", function () { setLang(c); });
-      }
-      bar.replaceChild(span, el);
-    });
+    paintLangbar(code);
+    paintTopics(code);
     try { localStorage.setItem("lang", code); } catch (e) {}
   }
 
@@ -817,11 +1276,37 @@
   try { saved = localStorage.getItem("lang"); } catch (e) {}
   if (saved === "en") { setLang("en"); }
 
-  // --- Aparición al hacer scroll, respetando prefers-reduced-motion ---
+  /* ---------- Navegación: marca la sección visible ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".railnav a"));
+  var sections = links
+    .map(function (a) { return document.querySelector(a.getAttribute("href")); })
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var visible = {};
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var best = null, bestRatio = 0;
+      sections.forEach(function (s) {
+        var r = visible[s.id] || 0;
+        if (r > bestRatio) { bestRatio = r; best = s.id; }
+      });
+      links.forEach(function (a) {
+        if (best && a.getAttribute("href") === "#" + best) { a.setAttribute("aria-current", "true"); }
+        else { a.removeAttribute("aria-current"); }
+      });
+    }, { threshold: [0, 0.15, 0.4, 0.75], rootMargin: "-10% 0px -55% 0px" });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+
+  /* ---------- Aparición al hacer scroll, respetando prefers-reduced-motion ---------- */
   var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealed = [];
   if (!calm && "IntersectionObserver" in window) {
-    var nodes = Array.prototype.slice.call(document.querySelectorAll("#sobre, .job, .panel, .grid3"));
-    nodes.forEach(function (n) {
+    revealed = Array.prototype.slice.call(
+      document.querySelectorAll("#sobre > div, .figure, .cards, .case, .job, .stack, .grid3")
+    );
+    revealed.forEach(function (n) {
       n.style.transition = "opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)";
       n.style.opacity = "0";
       n.style.transform = "translateY(14px)";
@@ -834,14 +1319,23 @@
           io.unobserve(e.target);
         }
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-    nodes.forEach(function (n) { io.observe(n); });
-
-    // Nunca dejar contenido invisible al imprimir.
-    window.addEventListener("beforeprint", function () {
-      nodes.forEach(function (n) { n.style.opacity = "1"; n.style.transform = "none"; });
-    });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+    revealed.forEach(function (n) { io.observe(n); });
   }
+
+  /* ---------- Al imprimir: todo visible y todo desplegado ---------- */
+  var reopen = [];
+  window.addEventListener("beforeprint", function () {
+    revealed.forEach(function (n) { n.style.opacity = "1"; n.style.transform = "none"; });
+    reopen = [];
+    Array.prototype.forEach.call(document.querySelectorAll("details:not([open])"), function (d) {
+      d.open = true; reopen.push(d);
+    });
+  });
+  window.addEventListener("afterprint", function () {
+    reopen.forEach(function (d) { d.open = false; });
+    reopen = [];
+  });
 })();
 </script>
 
@@ -853,6 +1347,7 @@
   "givenName": "Albert",
   "familyName": "Polo Fernández",
   "jobTitle": "Cloud System Engineer",
+  "description": "Consultoría de infraestructura Azure y Microsoft 365: Azure Virtual Desktop, identidad híbrida con Entra ID, infraestructura como código con Bicep y automatización con PowerShell.",
   "url": "https://albertpolfer.github.io/",
   "sameAs": ["https://www.linkedin.com/in/albertpolofernandez"],
   "address": {
@@ -867,9 +1362,10 @@
     { "@type": "Language", "name": "English", "alternateName": "en" }
   ],
   "knowsAbout": [
-    "Linux", "Windows Server", "Active Directory", "Citrix", "VMware",
-    "Microsoft Azure", "Veeam", "Ansible", "PowerShell", "Python",
-    "Grafana", "Zabbix", "Office 365"
+    "Microsoft Azure", "Azure Virtual Desktop", "Microsoft Entra ID", "Entra Connect",
+    "Bicep", "Infrastructure as Code", "FSLogix", "Azure Files", "Active Directory",
+    "Windows Server", "Linux", "PowerShell", "Microsoft Graph", "Microsoft 365",
+    "VMware", "Citrix", "Veeam", "Ansible", "Grafana", "Zabbix"
   ],
   "worksFor": { "@type": "Organization", "name": "M&G Corporate Consulting" },
   "alumniOf": [
