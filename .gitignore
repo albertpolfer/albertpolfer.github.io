@@ -12,6 +12,11 @@ uploads/
 Portfolio web de Albert Polo/
 .thumbnail
 
+# Notas de trabajo y contenido en espera: locales, nunca se publican
+PENDIENTES.md
+_casos-en-espera.html.txt
+_*.html.txt
+
 Thumbs.db
 desktop.ini
 .DS_Store

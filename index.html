@@ -364,6 +364,9 @@
 
     html, body { background: #fff !important; color: #000 !important; font-size: 10pt; }
 
+    /* El PDF es el CV, no el dossier comercial: fuera servicios y diagrama. */
+    #servicios, .figure { display: none !important; }
+
     .skip, .railnav, .langbar, .btn, .todo, .no-print,
     .card h3 .chev, .case .open-hint, form, .copybtn, #formstatus, .formnote { display: none !important; }
 
@@ -463,11 +466,11 @@
     <nav class="railnav" aria-label="Secciones">
       <a href="#sobre"><span data-lang="es">00 · Perfil</span><span data-lang="en">00 · Profile</span></a>
       <a href="#servicios"><span data-lang="es">01 · Servicios</span><span data-lang="en">01 · Services</span></a>
-      <a href="#casos"><span data-lang="es">02 · Casos</span><span data-lang="en">02 · Case studies</span></a>
-      <a href="#experiencia"><span data-lang="es">03 · Experiencia</span><span data-lang="en">03 · Experience</span></a>
-      <a href="#stack"><span data-lang="es">04 · Stack</span><span data-lang="en">04 · Stack</span></a>
-      <a href="#formacion"><span data-lang="es">05 · Formación</span><span data-lang="en">05 · Education</span></a>
-      <a href="#contacto"><span data-lang="es">06 · Contacto</span><span data-lang="en">06 · Contact</span></a>
+      
+      <a href="#experiencia"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></a>
+      <a href="#stack"><span data-lang="es">03 · Stack</span><span data-lang="en">03 · Stack</span></a>
+      <a href="#formacion"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></a>
+      <a href="#contacto"><span data-lang="es">05 · Contacto</span><span data-lang="en">05 · Contact</span></a>
     </nav>
 
     <div class="railcontact">
@@ -744,160 +747,11 @@
 
       </div>
 
-      <p class="todo">[[PENDIENTE: forma de trabajo y precios. ¿Proyecto cerrado, bolsa de horas, retainer mensual? ¿Das una horquilla de precio o prefieres «hablamos»? Ahora mismo no aparece nada.]]</p>
-      <p class="todo">[[PENDIENTE: ¿facturas como autónomo? Si vas a vender servicios desde aquí necesitas al menos un aviso legal y una política de privacidad, sobre todo con el formulario de contacto. Dime y los redacto.]]</p>
     </section>
 
-    <!-- ============ 02 · CASOS ============ -->
-    <section id="casos" class="band">
-      <p class="eyebrow"><span data-lang="es">02 · Casos</span><span data-lang="en">02 · Case studies</span></p>
-
-      <details class="case">
-        <summary>
-          <p class="sector"><span data-lang="es">Despacho profesional · ~50 usuarios</span><span data-lang="en">Professional practice · ~50 users</span></p>
-          <h3><span data-lang="es">Escritorio remoto híbrido montado desde cero</span><span data-lang="en">Hybrid remote desktop built from scratch</span></h3>
-          <p class="sum" data-lang="es">Un despacho sin infraestructura propia en la nube pasa a trabajar íntegramente sobre escritorios remotos en Azure, con su dominio, sus perfiles y su unidad de red de siempre.</p>
-          <p class="sum" data-lang="en">A practice with no cloud infrastructure moves entirely onto Azure remote desktops, keeping its domain, its profiles and the network drive everyone was used to.</p>
-          <dl class="metrics">
-            <div><dt data-lang="es">Session hosts</dt><dt data-lang="en">Session hosts</dt><dd>50</dd></div>
-            <div><dt data-lang="es">Usuarios híbridos</dt><dt data-lang="en">Hybrid users</dt><dd>~50</dd></div>
-            <div><dt data-lang="es">Entorno en Bicep</dt><dt data-lang="en">Defined in Bicep</dt><dd>100%</dd></div>
-          </dl>
-          <p class="open-hint" data-lang="es">+ Ver detalle</p>
-          <p class="open-hint" data-lang="en">+ See detail</p>
-        </summary>
-        <div class="detail">
-          <div data-lang="es">
-            <h4>Qué se hizo</h4>
-            <ul>
-              <li>Bosque nuevo sobre un controlador de dominio desplegado en Azure, promovido automáticamente por la extensión de la máquina.</li>
-              <li>Entra Connect con sincronización de hash de contraseña: unos 50 usuarios híbridos repartidos en OUs de sincronización y de AVD.</li>
-              <li>50 session hosts con Hybrid Azure AD Join, Microsoft 365, Adobe Reader y FSLogix en la imagen.</li>
-              <li>Azure Files autenticado con Entra Kerberos y la unidad de red montada sola al iniciar sesión, sin pedir credenciales.</li>
-              <li>Red, Key Vault, cuenta de almacenamiento, dominio y hosts definidos en plantillas Bicep modulares, validadas con <span class="mono">what-if</span> antes de cada despliegue.</li>
-              <li>Plan de escalado que desaloja los hosts sin sesión activa.</li>
-            </ul>
-            <h4>Lo que costó de verdad</h4>
-            <ul>
-              <li>Las cuotas de vCPU en Azure van también por familia de máquina, no solo por región: la familia se agotó antes que el total. Y desalojar una máquina no libera cuota, hay que eliminarla.</li>
-              <li>El bosque interno y el dominio de correo no coincidían, así que los usuarios llevan un sufijo UPN añadido al bosque para que el soft-match empareje sin crear duplicados.</li>
-              <li>Montar Azure Files desde Run Command como SYSTEM se queda colgado; hay que hacerlo en sesión interactiva.</li>
-            </ul>
-          </div>
-          <div data-lang="en">
-            <h4>What was done</h4>
-            <ul>
-              <li>New forest on a domain controller deployed in Azure, promoted automatically by the VM extension.</li>
-              <li>Entra Connect with password hash sync: around 50 hybrid users across sync and AVD OUs.</li>
-              <li>50 session hosts with Hybrid Azure AD Join, Microsoft 365, Adobe Reader and FSLogix baked in.</li>
-              <li>Azure Files authenticated with Entra Kerberos, with the network drive mounting itself at sign-in without prompting.</li>
-              <li>Network, Key Vault, storage account, domain and hosts defined in modular Bicep templates, validated with <span class="mono">what-if</span> before each deployment.</li>
-              <li>Scaling plan that deallocates hosts with no active session.</li>
-            </ul>
-            <h4>The parts that actually hurt</h4>
-            <ul>
-              <li>Azure vCPU quota is per VM family as well as per region — the family ran out before the regional total. And deallocating a VM does not release quota; it has to be deleted.</li>
-              <li>The internal forest and the mail domain did not match, so users carry a UPN suffix added to the forest so soft-match pairs them without creating duplicates.</li>
-              <li>Mounting Azure Files from Run Command as SYSTEM hangs; it has to be done in an interactive session.</li>
-            </ul>
-          </div>
-        </div>
-      </details>
-
-      <details class="case">
-        <summary>
-          <p class="sector"><span data-lang="es">Mismo cliente · fase de explotación</span><span data-lang="en">Same client · rollout phase</span></p>
-          <h3><span data-lang="es">Idioma y software sectorial en 50 escritorios, sin tocar ninguno a mano</span><span data-lang="en">Language and line-of-business software across 50 desktops, none touched by hand</span></h3>
-          <p class="sum" data-lang="es">Los escritorios se habían desplegado en inglés y sin la aplicación con la que trabaja el despacho. Había que corregir los cincuenta sin abrir una sesión en cada uno.</p>
-          <p class="sum" data-lang="en">The desktops had shipped in English and without the application the practice actually works in. All fifty had to be fixed without opening a session on each one.</p>
-          <dl class="metrics">
-            <div><dt data-lang="es">Hosts intervenidos</dt><dt data-lang="en">Hosts changed</dt><dd>48</dd></div>
-            <div><dt data-lang="es">A mano</dt><dt data-lang="en">By hand</dt><dd>0</dd></div>
-            <div><dt data-lang="es">Instalación</dt><dt data-lang="en">Install time</dt><dd>95 s</dd></div>
-          </dl>
-          <p class="open-hint" data-lang="es">+ Ver detalle</p>
-          <p class="open-hint" data-lang="en">+ See detail</p>
-        </summary>
-        <div class="detail">
-          <div data-lang="es">
-            <h4>Qué se hizo</h4>
-            <ul>
-              <li>Español como idioma de sistema y de la pantalla de inicio de sesión en 48 hosts, aplicado como SYSTEM vía Run Command.</li>
-              <li>Instalación silenciosa del software del sector, un instalador NSIS, con sus tres DSN ODBC contra SQL Server.</li>
-              <li>Orquestador que recorre la flota por lotes, con el host de referencia blindado para no tocarlo.</li>
-            </ul>
-            <h4>Cómo se hizo sin romper nada</h4>
-            <ul>
-              <li>Piloto en un solo host antes que nada, y validación en frío: reiniciar y comprobar que el idioma persiste, incluido el mensaje de error del sistema.</li>
-              <li>Verificación forense contra el host de referencia. La instalación silenciosa dejaba 3 ficheros frente a 28, lo que parecía un fallo. Comparando recuentos y marcas de tiempo se vio que la aplicación real —461 ficheros, 959&nbsp;MB— estaba idéntica en ambos, y que los 25 restantes eran datos que el programa copia de la red la primera vez que se abre.</li>
-              <li>Prueba en seco del orquestador sobre los 48 hosts antes de lanzarlo de verdad.</li>
-            </ul>
-          </div>
-          <div data-lang="en">
-            <h4>What was done</h4>
-            <ul>
-              <li>Spanish as the system and sign-in screen language on 48 hosts, applied as SYSTEM via Run Command.</li>
-              <li>Silent install of the sector application, an NSIS installer, with its three ODBC DSNs against SQL Server.</li>
-              <li>An orchestrator that walks the fleet in batches, with the reference host guarded so it is never touched.</li>
-            </ul>
-            <h4>How it was done without breaking anything</h4>
-            <ul>
-              <li>Pilot on a single host first, then cold validation: reboot and confirm the language persists, right down to the system error message.</li>
-              <li>Forensic verification against the reference host. The silent install left 3 files against 28, which looked like a failure. Comparing counts and timestamps showed the real application — 461 files, 959&nbsp;MB — was identical on both, and the remaining 25 were runtime data the program copies from the network the first time it opens.</li>
-              <li>Dry run of the orchestrator across all 48 hosts before firing it for real.</li>
-            </ul>
-          </div>
-        </div>
-      </details>
-
-      <details class="case">
-        <summary>
-          <p class="sector"><span data-lang="es">Correduría · auditoría de tenant</span><span data-lang="en">Brokerage · tenant audit</span></p>
-          <h3><span data-lang="es">Inventario completo de un Microsoft 365 heredado</span><span data-lang="en">Full inventory of an inherited Microsoft 365</span></h3>
-          <p class="sum" data-lang="es">Un tenant que nadie había documentado. Diez bloques de scripts para sacar identidad, grupos, Teams, licencias y permisos, y saber por dónde se empieza.</p>
-          <p class="sum" data-lang="en">A tenant nobody had documented. Ten script blocks to pull identity, groups, Teams, licensing and permissions, and work out where to start.</p>
-          <dl class="metrics">
-            <div><dt data-lang="es">Bloques</dt><dt data-lang="en">Blocks</dt><dd>10</dd></div>
-            <div><dt data-lang="es">Sin consentimiento</dt><dt data-lang="en">Without consent</dt><dd>5</dd></div>
-          </dl>
-          <p class="open-hint" data-lang="es">+ Ver detalle</p>
-          <p class="open-hint" data-lang="en">+ See detail</p>
-        </summary>
-        <div class="detail">
-          <div data-lang="es">
-            <h4>Qué se hizo</h4>
-            <ul>
-              <li>Suite de scripts en PowerShell que extrae el inventario del tenant por bloques: identidad y grupos, Teams y telefonía, licencias, permisos.</li>
-              <li>Registro de aplicación con consentimiento de administrador para poder ejecutarlo desatendido por token, sin pedir sesión en cada bloque.</li>
-              <li>Ruta alternativa para los bloques que no necesitan Microsoft Graph, de modo que se pueda empezar a auditar el mismo día aunque el consentimiento tarde en aprobarse.</li>
-            </ul>
-            <h4>Detalle útil</h4>
-            <ul>
-              <li>Cinco de los diez bloques salían adelante sin Graph, apoyándose solo en los módulos de Teams. Eso permitió entregar la mitad del inventario mientras el consentimiento estaba en cola.</li>
-            </ul>
-          </div>
-          <div data-lang="en">
-            <h4>What was done</h4>
-            <ul>
-              <li>A PowerShell script suite that extracts the tenant inventory in blocks: identity and groups, Teams and voice, licensing, permissions.</li>
-              <li>App registration with admin consent so it could run unattended by token, without prompting for sign-in on every block.</li>
-              <li>A fallback path for the blocks that do not need Microsoft Graph, so auditing could start the same day even while consent was pending.</li>
-            </ul>
-            <h4>Useful detail</h4>
-            <ul>
-              <li>Five of the ten blocks ran without Graph at all, relying only on the Teams modules. That made it possible to deliver half the inventory while consent sat in the approval queue.</li>
-            </ul>
-          </div>
-        </div>
-      </details>
-
-      <p class="todo">[[PENDIENTE IMPORTANTE: estos tres casos salen de tu historial de trabajo en Claude. Los he escrito SIN nombres de cliente, sin nombres de máquina, sin dominios y sin cuentas de almacenamiento, a propósito. Antes de publicar, confirma con M&amp;G que puedes contar este trabajo aunque sea de forma anónima: el trabajo es de la consultora y de sus clientes, no tuyo.]]</p>
-      <p class="todo">[[PENDIENTE: ¿puedes dar algún dato de negocio en vez de solo técnico? Por ejemplo horas de despliegue ahorradas, tiempo de alta de un usuario nuevo, o coste mensual antes y después. Vende mucho más que el recuento de hosts.]]</p>
-    </section>
-
-    <!-- ============ 03 · EXPERIENCIA ============ -->
+    <!-- ============ 02 · EXPERIENCIA ============ -->
     <section id="experiencia" class="band">
-      <p class="eyebrow"><span data-lang="es">03 · Experiencia</span><span data-lang="en">03 · Experience</span></p>
+      <p class="eyebrow"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></p>
 
       <article class="job">
         <div>
@@ -965,9 +819,9 @@
       </article>
     </section>
 
-    <!-- ============ 04 · STACK ============ -->
+    <!-- ============ 03 · STACK ============ -->
     <section id="stack" class="band">
-      <p class="eyebrow"><span data-lang="es">04 · Stack</span><span data-lang="en">04 · Stack</span></p>
+      <p class="eyebrow"><span data-lang="es">03 · Stack</span><span data-lang="en">03 · Stack</span></p>
       <dl class="stack">
         <div>
           <dt data-lang="es">Nube</dt><dt data-lang="en">Cloud</dt>
@@ -994,12 +848,11 @@
           <dd><span>Grafana</span><span>Zabbix</span><span>Veeam</span><span>SentinelOne</span><span>Azure Run Command</span></dd>
         </div>
       </dl>
-      <p class="todo">[[PENDIENTE: he montado esta lista con lo que aparece en tu CV y en tu trabajo real. Quita lo que ya no toques: poner Java o MySQL en un perfil de infraestructura puede restar más que sumar.]]</p>
     </section>
 
-    <!-- ============ 05 · FORMACIÓN ============ -->
+    <!-- ============ 04 · FORMACIÓN ============ -->
     <section id="formacion" class="band">
-      <p class="eyebrow"><span data-lang="es">05 · Formación</span><span data-lang="en">05 · Education</span></p>
+      <p class="eyebrow"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></p>
 
       <div class="grid3">
         <div>
@@ -1031,8 +884,6 @@
         <div>
           <p class="label"><span data-lang="es">Certificaciones</span><span data-lang="en">Certifications</span></p>
           <p>B2 First — Score 179<br><span data-lang="es">Carnet de conducir B</span><span data-lang="en">Driving licence B</span></p>
-          <p class="todo">[[PENDIENTE: emisor y año del B2 First. El CV solo indica «B2 First – Score 179».]]</p>
-          <p class="todo">[[PENDIENTE: si vas a vender servicios de Azure, una AZ-104 o AZ-800 en la web vale mucho. ¿Tienes alguna en curso o prevista? El CV no recoge ninguna.]]</p>
         </div>
       </div>
     </section>
@@ -1040,7 +891,7 @@
   </main>
 </div>
 
-<!-- ============ 06 · CONTACTO ============ -->
+<!-- ============ 05 · CONTACTO ============ -->
 <section id="contacto">
   <div class="inner">
     <h2>
@@ -1114,7 +965,6 @@
           <li><a href="#" data-print><span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span></a></li>
         </ul>
 
-        <p class="todo" data-lang="es">[[PENDIENTE: ¿quieres un formulario de verdad que te llegue al correo sin abrir el cliente? Se puede con un servicio externo tipo Formspree sin salir de GitHub Pages. Dímelo y lo cambio, pero implica dar de alta una cuenta y añadir su aviso de privacidad.]]</p>
       </div>
 
     </div>
