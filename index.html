@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Albert Polo — Cloud System Engineer</title>
+<meta name="description" content="Albert Polo Fernández, Cloud System Engineer en Barcelona. Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización con Ansible y monitorización con Grafana y Zabbix.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://albertpolfer.github.io/">
+
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Albert Polo">
+<meta property="og:title" content="Albert Polo — Cloud System Engineer">
+<meta property="og:description" content="Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización y monitorización. Barcelona.">
+<meta property="og:url" content="https://albertpolfer.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Albert Polo — Cloud System Engineer">
+<meta name="twitter:description" content="Infraestructuras Linux y Windows, entornos Citrix y Azure, automatización y monitorización. Barcelona.">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:  oklch(0.982 0.004 70);
+    --ink:    oklch(0.24 0.012 60);
+    --accent: oklch(0.52 0.14 42);
+    --panel:  oklch(0.955 0.005 70);
+    --rule:   oklch(0.24 0.012 60 / 0.16);
+    --soft:   oklch(0.24 0.012 60 / 0.72);
+
+    --sans:  Archivo, "Segoe UI", system-ui, sans-serif;
+    --serif: Newsreader, Georgia, "Times New Roman", serif;
+    --mono:  "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: anywhere;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .skip {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 12px;
+    padding: 10px 14px; z-index: 20;
+  }
+  .skip:focus { left: 8px; top: 8px; }
+
+  /* ---------- Marcadores de contenido pendiente ---------- */
+
+  .todo {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    margin: 14px 0 0;
+    padding: 12px 14px;
+    border: 1px dashed oklch(0.24 0.012 60 / 0.4);
+    color: oklch(0.24 0.012 60 / 0.85);
+    background: oklch(0.955 0.005 70);
+    max-width: 54ch;
+  }
+
+  /* ---------- Estructura ---------- */
+
+  .shell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: clamp(28px, 5vw, 72px);
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 56px) clamp(20px, 4vw, 56px) 0;
+  }
+
+  .rail {
+    flex: 0 1 300px;
+    min-width: 260px;
+    position: sticky;
+    top: clamp(24px, 5vw, 56px);
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2.1rem, 3vw, 2.7rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+  }
+
+  .kicker {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .place {
+    margin: 6px 0 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+  }
+
+  .railnav {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+  }
+  .railnav a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    width: fit-content;
+  }
+  .railnav a:hover, .railnav a:focus-visible { opacity: 1; }
+
+  .railcontact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .railcontact a, .railcontact .mail {
+    border-bottom: 1px solid oklch(0.24 0.012 60 / 0.28);
+    padding-bottom: 3px;
+    width: fit-content;
+  }
+  .railcontact a:hover { border-color: var(--accent); }
+
+  .mail {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0 0 3px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .mail:hover { color: var(--accent); border-color: var(--accent); }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid oklch(0.24 0.012 60 / 0.32);
+    background: none;
+    color: inherit;
+    padding: 13px 16px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+  }
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .langbar {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .langbar .sep { opacity: 0.35; }
+  .langbar button {
+    background: none; border: 0; padding: 0;
+    font: inherit; letter-spacing: inherit; color: inherit;
+    opacity: 0.6; cursor: pointer;
+  }
+  .langbar button:hover { opacity: 1; }
+  .langbar [aria-current="true"] { font-weight: 500; opacity: 1; cursor: default; }
+
+  main {
+    flex: 1 1 520px;
+    min-width: 0;
+    padding-bottom: clamp(56px, 10vh, 120px);
+  }
+
+  /* ---------- Secciones ---------- */
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 clamp(28px, 5vh, 48px);
+    opacity: 0.72;
+  }
+
+  #sobre { padding: clamp(8px, 4vh, 40px) 0 clamp(40px, 8vh, 84px); }
+
+  .lede {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.4vw, 3.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 clamp(24px, 4vh, 40px);
+    max-width: 30ch;
+    text-wrap: pretty;
+  }
+
+  .prose {
+    font-size: clamp(1rem, 1.3vw, 1.12rem);
+    line-height: 1.65;
+    margin: 0 0 18px;
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+  .prose.dim { font-size: 1rem; line-height: 1.7; margin: 0; opacity: 0.8; }
+
+  .band {
+    border-top: 1px solid var(--rule);
+    padding-top: 22px;
+  }
+
+  .job {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(16px, 3vw, 44px);
+    padding-bottom: clamp(36px, 7vh, 72px);
+  }
+  .job + .job {
+    padding-top: clamp(32px, 6vh, 64px);
+    border-top: 1px solid var(--rule);
+  }
+
+  .when {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    margin: 0 0 12px;
+    color: var(--accent);
+  }
+
+  .org {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+
+  .role { margin: 0; font-size: 0.95rem; opacity: 0.72; }
+
+  .roles { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .roles p { margin: 0; font-size: 0.95rem; }
+  .roles .sub {
+    margin: 3px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    opacity: 0.72;
+  }
+
+  .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+    line-height: 1.45;
+    margin: 0 0 20px;
+    max-width: 40ch;
+    text-wrap: pretty;
+  }
+
+  .body { font-size: 1rem; line-height: 1.65; margin: 0 0 16px; max-width: 54ch; text-wrap: pretty; }
+  .body:last-of-type { margin-bottom: 0; }
+  .body.dim { opacity: 0.8; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; padding: 0; list-style: none; }
+  .tags li {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    border: 1px solid oklch(0.24 0.012 60 / 0.22);
+    padding: 6px 9px;
+  }
+
+  .panel {
+    background: var(--panel);
+    padding: clamp(24px, 4vw, 44px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(20px, 3vw, 44px);
+  }
+  .panel h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 10px;
+  }
+
+  .grid3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: clamp(24px, 3vw, 44px);
+  }
+  .grid3 .school { margin: 0 0 6px; font-size: 1.05rem; }
+  .grid3 .detail { margin: 0; font-size: 0.95rem; line-height: 1.55; opacity: 0.78; }
+
+  .extras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: clamp(24px, 3vw, 44px);
+    margin-top: clamp(32px, 5vh, 56px);
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .extras .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    opacity: 0.72;
+  }
+  .extras p:not(.label) { margin: 0; font-size: 0.95rem; line-height: 1.7; }
+
+  /* ---------- Cierre ---------- */
+
+  #contacto { background: var(--ink); color: var(--paper); }
+  #contacto .inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(56px, 12vh, 130px) clamp(20px, 4vw, 56px) clamp(28px, 4vh, 48px);
+  }
+  #contacto h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.7rem, 4vw, 3.2rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 26ch;
+    text-wrap: pretty;
+  }
+  #contacto .bigmail {
+    display: inline-block;
+    margin-top: clamp(26px, 5vh, 48px);
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 2.6vw, 2.1rem);
+    color: var(--paper);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid oklch(0.982 0.004 70 / 0.45);
+    padding: 0 0 4px;
+    cursor: pointer;
+  }
+  #contacto .bigmail:hover { border-color: oklch(0.78 0.13 45); color: oklch(0.86 0.1 48); }
+  #contacto .links { display: flex; flex-wrap: wrap; gap: 26px; margin-top: clamp(34px, 7vh, 70px); }
+  #contacto .links a, #contacto .links button {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(0.982 0.004 70 / 0.82);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+  #contacto .links a:hover, #contacto .links button:hover { color: var(--paper); }
+  #contacto .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: clamp(44px, 9vh, 96px);
+    padding-top: 18px;
+    border-top: 1px solid oklch(0.982 0.004 70 / 0.2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: oklch(0.982 0.004 70 / 0.7);
+  }
+  #contacto .todo {
+    border-color: oklch(0.982 0.004 70 / 0.4);
+    background: oklch(0.982 0.004 70 / 0.06);
+    color: oklch(0.982 0.004 70 / 0.85);
+  }
+
+  /* ---------- Idioma ---------- */
+
+  [data-lang="en"] { display: none; }
+  html.en [data-lang="es"] { display: none; }
+  html.en [data-lang="en"] { display: block; }
+  html.en span[data-lang="en"], html.en li[data-lang="en"] { display: inline; }
+
+  /* ---------- Móvil, hasta 360 px ---------- */
+
+  @media (max-width: 900px) {
+    .rail { position: static; min-width: 0; flex-basis: 100%; }
+  }
+
+  @media (max-width: 480px) {
+    .shell { padding-left: 18px; padding-right: 18px; gap: 30px; }
+    .name { font-size: 2rem; }
+    .lede { font-size: 1.5rem; }
+    .org { font-size: 1.45rem; }
+    #contacto .inner { padding-left: 18px; padding-right: 18px; }
+    #contacto .bigmail { font-size: 1.1rem; }
+    #contacto .foot { flex-direction: column; gap: 8px; }
+    .tags li { font-size: 10px; padding: 5px 7px; }
+  }
+
+  /* ---------- Impresión: Ctrl+P genera el CV ---------- */
+
+  @media print {
+    @page { margin: 15mm 14mm; }
+
+    html, body {
+      background: #fff !important;
+      color: #000 !important;
+      font-size: 10pt;
+    }
+
+    .skip, .railnav, .langbar, .btn, .todo, .no-print { display: none !important; }
+
+    .shell {
+      display: block;
+      max-width: none;
+      padding: 0;
+    }
+
+    .rail {
+      position: static;
+      display: block;
+      margin-bottom: 14pt;
+      padding-bottom: 8pt;
+      border-bottom: 1px solid #000;
+      break-inside: avoid;
+    }
+    .rail > * + * { margin-top: 6pt; }
+
+    .name { font-size: 20pt; margin-bottom: 4pt; }
+    .kicker, .place { color: #000 !important; opacity: 1; font-size: 8.5pt; }
+
+    .railcontact { border: 0; padding-top: 6pt; gap: 2pt; }
+    .railcontact a, .railcontact .mail { border: 0; padding: 0; }
+
+    main { padding-bottom: 0; }
+
+    .eyebrow { color: #000 !important; opacity: 1; font-size: 8.5pt; margin-bottom: 8pt; }
+    .lede { font-size: 13pt; max-width: none; margin-bottom: 8pt; }
+    .prose, .body, .prose.dim, .body.dim { max-width: none; opacity: 1; font-size: 9.5pt; line-height: 1.4; margin-bottom: 5pt; }
+    .quote { font-size: 10.5pt; max-width: none; margin-bottom: 6pt; }
+
+    .band { border-top: 1px solid #000; padding-top: 10pt; margin-top: 10pt; }
+
+    .job, .panel, .grid3, .extras {
+      display: block;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      padding: 0;
+      margin-bottom: 10pt;
+      gap: 0;
+    }
+    .job + .job { border-top: 1px solid #bbb; padding-top: 8pt; }
+    .grid3 > div, .extras > div { break-inside: avoid; margin-bottom: 8pt; }
+
+    section { break-inside: avoid; page-break-inside: avoid; }
+
+    .when { color: #000 !important; font-size: 8.5pt; margin-bottom: 3pt; }
+    .org { font-size: 12pt; margin-bottom: 2pt; }
+    .roles { margin-top: 6pt; gap: 4pt; }
+
+    .tags { margin-top: 6pt; gap: 4pt; }
+    .tags li { border: 1px solid #999; font-size: 8pt; padding: 2pt 4pt; }
+
+    .panel { background: none !important; border: 1px solid #999; padding: 8pt; }
+
+    #contacto { background: none !important; color: #000 !important; break-inside: avoid; }
+    #contacto .inner { padding: 10pt 0 0; }
+    #contacto h2 { font-size: 12pt; max-width: none; }
+    #contacto .bigmail { color: #000 !important; font-size: 11pt; border: 0; margin-top: 6pt; }
+    #contacto .links { margin-top: 8pt; gap: 14pt; }
+    #contacto .links a { color: #000 !important; font-size: 8.5pt; }
+    #contacto .foot { margin-top: 10pt; color: #000 !important; border-top: 1px solid #000; font-size: 8pt; }
+
+    a { color: #000 !important; text-decoration: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#sobre">Saltar al contenido</a>
+
+<div class="shell">
+
+  <aside class="rail">
+    <div>
+      <h1 class="name">Albert Polo<br>Fernández</h1>
+      <p class="kicker">Cloud System Engineer</p>
+      <p class="place">Barcelona · Catalunya</p>
+    </div>
+
+    <nav class="railnav" aria-label="Secciones">
+      <a href="#sobre"><span data-lang="es">01 · Sobre mí</span><span data-lang="en">01 · About</span></a>
+      <a href="#experiencia"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></a>
+      <a href="#proyecto"><span data-lang="es">03 · Proyecto destacado</span><span data-lang="en">03 · Featured project</span></a>
+      <a href="#formacion"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></a>
+    </nav>
+
+    <div class="railcontact">
+      <button type="button" class="mail" data-mail>
+        <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+      </button>
+      <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
+    </div>
+
+    <button type="button" class="btn" data-print>
+      <span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span>
+    </button>
+
+    <div class="langbar">
+      <span lang="es" data-langbtn="es" aria-current="true">ES</span>
+      <span class="sep">/</span>
+      <button type="button" lang="en" data-langbtn="en">EN</button>
+    </div>
+  </aside>
+
+  <main>
+
+    <section id="sobre">
+      <div data-lang="es">
+        <h2 class="lede">Ingeniero de sistemas cloud. Desde 2021 administro y optimizo infraestructuras Linux y Windows, entornos Citrix y Azure, y automatizo su gestión.</h2>
+        <p class="prose">Compagino el trabajo en una empresa de servicios cloud con el Grado en Ingeniería Informática de Gestión y Sistemas de Información en Tecnocampus. Antes cursé el ciclo superior de Administración de Sistemas Informáticos en Red con perfil de ciberseguridad.</p>
+        <p class="prose dim">Trabajo con Java y Python, HTML y CSS, bases de datos MySQL, sistemas Linux y Windows con Active Directory, virtualización con Citrix y soluciones en Microsoft Azure.</p>
+      </div>
+      <div data-lang="en">
+        <h2 class="lede">Cloud systems engineer. Since 2021 I have managed and optimised Linux and Windows infrastructures, Citrix and Azure environments, and automated their operation.</h2>
+        <p class="prose">I combine work at a cloud services company with a degree in Computer Engineering of Management and Information Systems at Tecnocampus. Before that I completed a higher vocational degree in network systems administration with a cybersecurity profile.</p>
+        <p class="prose dim">I work with Java and Python, HTML and CSS, MySQL databases, Linux and Windows systems with Active Directory, Citrix virtualisation and Microsoft Azure solutions.</p>
+      </div>
+    </section>
+
+    <section id="experiencia" class="band">
+      <p class="eyebrow"><span data-lang="es">02 · Experiencia</span><span data-lang="en">02 · Experience</span></p>
+
+      <article class="job">
+        <div>
+          <p class="when">nov. 2025 — <span data-lang="es">hoy</span><span data-lang="en">now</span></p>
+          <h3 class="org">M&amp;G Corporate Consulting</h3>
+          <p class="role">System Engineer · Barcelona</p>
+        </div>
+        <div>
+          <p class="todo">[[PENDIENTE: descripción del puesto en M&amp;G Corporate Consulting. El CV no incluye ninguna. 2-3 frases: qué gestionas, con qué tecnologías y para qué tipo de cliente.]]</p>
+          <p class="todo">[[PENDIENTE: lista de tecnologías reales de este puesto para las etiquetas.]]</p>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <p class="when">oct. 2021 — oct. 2025</p>
+          <h3 class="org">beServices</h3>
+          <p class="role">Barcelona · <span data-lang="es">4 años 1 mes</span><span data-lang="en">4 years 1 month</span></p>
+          <ul class="roles">
+            <li>
+              <p>System Engineer</p>
+              <p class="sub">oct. 2021 — oct. 2025</p>
+            </li>
+            <li>
+              <p>System Administrator</p>
+              <p class="sub">jun. 2022 — oct. 2024</p>
+            </li>
+            <li>
+              <p>Junior System Administrator</p>
+              <p class="sub">oct. 2021 — jun. 2022</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div data-lang="es">
+            <p class="quote">«Optimización de procesos, resolución de problemas y una infraestructura segura y de alto rendimiento.»</p>
+            <p class="body">Gestión y optimización de infraestructuras Linux y Windows, garantizando estabilidad, seguridad y rendimiento. Administración de entornos Citrix y Azure, permisos y políticas en Windows Server, y virtualización con VMware.</p>
+            <p class="body">Automatización con AWS y Ansible para simplificar la gestión de infraestructura y reducir tareas repetitivas mediante scripting en Bash, PowerShell y Python.</p>
+            <p class="body">Monitorización avanzada con Grafana y Zabbix: cuadros de mando, alertas y triggers a medida para la detección proactiva de incidencias. Seguridad con SentinelOne.</p>
+            <p class="body dim">Como System Administrator, gestión de la infraestructura centrada en entornos Citrix, servidores Windows, copias de seguridad con Veeam y virtualización VMware, además de proyectos de migración dentro de VMware y hacia Office 365. En la etapa junior, apoyo en administración de servidores, políticas de red, scripts de automatización y creación de máquinas virtuales para proyectos internos.</p>
+          </div>
+          <div data-lang="en">
+            <p class="quote">“Process optimisation, problem-solving and a secure, high-performing IT infrastructure.”</p>
+            <p class="body">Managing and optimising Linux and Windows infrastructures, ensuring stability, security and high performance. Administering Citrix and Azure environments, permissions and policies in Windows Server, and virtualisation with VMware.</p>
+            <p class="body">Automation with AWS and Ansible to streamline infrastructure management and reduce repetitive tasks through scripting in Bash, PowerShell and Python.</p>
+            <p class="body">Advanced monitoring with Grafana and Zabbix: customised dashboards, alerts and triggers for proactive incident detection. Security with SentinelOne.</p>
+            <p class="body dim">As System Administrator, managing infrastructure focused on Citrix environments, Windows servers, Veeam backup solutions and VMware virtualisation, plus migration projects within VMware and to Office 365. In the junior role, supporting server administration, network policies, automation scripts and virtual machines for internal projects.</p>
+          </div>
+          <ul class="tags">
+            <li>Linux</li>
+            <li>Windows Server</li>
+            <li>Active Directory</li>
+            <li>Citrix</li>
+            <li>VMware</li>
+            <li>Azure</li>
+            <li>AWS</li>
+            <li>Veeam</li>
+            <li>Ansible</li>
+            <li>Bash</li>
+            <li>PowerShell</li>
+            <li>Python</li>
+            <li>Grafana</li>
+            <li>Zabbix</li>
+            <li>SentinelOne</li>
+            <li>Office 365</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div>
+          <p class="when">jun. 2021 — <span data-lang="es">ago. 2021</span><span data-lang="en">Aug 2021</span></p>
+          <h3 class="org">Nestlé Nespresso SA</h3>
+          <p class="role">Telesales and Service Representative — Technician Support · Barcelona</p>
+        </div>
+        <div>
+          <p class="body" data-lang="es">Televenta y soporte técnico: comunicación con cliente, resolución de incidencias y trabajo por objetivos en un entorno de ritmo alto.</p>
+          <p class="body" data-lang="en">Telesales and technical support: customer communication, troubleshooting and working to targets in a fast-paced environment.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="proyecto" class="band">
+      <p class="eyebrow"><span data-lang="es">03 · Proyecto destacado</span><span data-lang="en">03 · Featured project</span></p>
+      <div class="panel">
+        <div>
+          <h3><span data-lang="es">Sin proyecto publicado</span><span data-lang="en">No project published yet</span></h3>
+          <p class="kicker">[[PENDIENTE]]</p>
+        </div>
+        <div>
+          <p class="todo">[[PENDIENTE: el CV no recoge ningún proyecto. Título real, tu rol, 2-3 frases de contexto y stack, y un resultado medible. Si tienes TFG o repositorio público, enlázalo aquí. Si no quieres esta sección, dímelo y la quito junto con su entrada de navegación.]]</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="formacion" class="band">
+      <p class="eyebrow"><span data-lang="es">04 · Formación</span><span data-lang="en">04 · Education</span></p>
+
+      <div class="grid3">
+        <div>
+          <p class="when">sept. 2022 — jun. 2026</p>
+          <p class="school">Tecnocampus</p>
+          <p class="detail" data-lang="es">Grado en Ingeniería Informática de Gestión y Sistemas de Información</p>
+          <p class="detail" data-lang="en">Engineer’s degree, Computer Engineering of Management and Information Systems</p>
+        </div>
+        <div>
+          <p class="when">2020 — 2022</p>
+          <p class="school">Institut Tecnològic de Barcelona</p>
+          <p class="detail" data-lang="es">Técnico en Administración de Sistemas Informáticos en Red, perfil de ciberseguridad</p>
+          <p class="detail" data-lang="en">Technician in Computer Systems and Networks Administration, cybersecurity profile</p>
+        </div>
+        <div>
+          <p class="when">2018 — jun. 2020</p>
+          <p class="school">Institut Forat del Vent</p>
+          <p class="detail" data-lang="es">Bachillerato tecnológico</p>
+          <p class="detail" data-lang="en">Technology high school</p>
+        </div>
+      </div>
+
+      <div class="extras">
+        <div>
+          <p class="label"><span data-lang="es">Idiomas</span><span data-lang="en">Languages</span></p>
+          <p data-lang="es">Catalán (nativo) · Español (nativo) · Inglés (competencia profesional)</p>
+          <p data-lang="en">Catalan (native) · Spanish (native) · English (professional working)</p>
+        </div>
+        <div>
+          <p class="label"><span data-lang="es">Certificaciones</span><span data-lang="en">Certifications</span></p>
+          <p>B2 First — Score 179<br><span data-lang="es">Carnet de conducir B</span><span data-lang="en">Driving licence B</span></p>
+          <p class="todo">[[PENDIENTE: emisor y año del B2 First (¿Cambridge English, qué año?). El CV solo indica «B2 First – Score 179».]]</p>
+          <p class="todo">[[PENDIENTE: ¿alguna certificación técnica (AZ-104, AZ-500, SC-300…)? El CV no recoge ninguna, así que no he puesto nada.]]</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<section id="contacto">
+  <div class="inner">
+    <h2>
+      <span data-lang="es">¿Un proyecto de infraestructura cloud? Hablemos.</span>
+      <span data-lang="en">Got a cloud infrastructure project? Let’s talk.</span>
+    </h2>
+
+    <button type="button" class="bigmail" data-mail>
+      <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+    </button>
+
+    <div class="links">
+      <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
+      <button type="button" data-print class="no-print">
+        <span data-lang="es">Guardar CV en PDF</span><span data-lang="en">Save CV as PDF</span>
+      </button>
+    </div>
+
+    <p class="todo no-print">[[PENDIENTE: confirma tu disponibilidad. He puesto un titular neutro; si estás abierto a propuestas o no lo estás, dime la frase exacta y la cambio.]]</p>
+
+    <div class="foot">
+      <span>Albert Polo Fernández · Barcelona</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+
+  // --- Correo ofuscado: nunca aparece un mailto: plano en el HTML servido ---
+  var u = ["albertpolfer", "gmail", "com"];
+  var addr = u[0] + String.fromCharCode(64) + u[1] + "." + u[2];
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-mail]"), function (btn) {
+    var label = btn.querySelector("[data-mail-text]");
+    if (label) { label.textContent = addr; }
+    btn.setAttribute("aria-label", "Escribir a " + addr);
+    btn.addEventListener("click", function () {
+      window.location.href = "mai" + "lto:" + addr;
+    });
+  });
+
+  // --- Guardar en PDF ---
+  Array.prototype.forEach.call(document.querySelectorAll("[data-print]"), function (btn) {
+    btn.addEventListener("click", function () { window.print(); });
+  });
+
+  // --- Cambio de idioma ---
+  var root = document.documentElement;
+  var bar = document.querySelector(".langbar");
+
+  function setLang(code) {
+    var isEn = code === "en";
+    root.classList.toggle("en", isEn);
+    root.lang = isEn ? "en" : "es";
+    Array.prototype.forEach.call(bar.children, function (el) {
+      var c = el.getAttribute("data-langbtn");
+      if (!c) { return; }
+      var active = c === code;
+      var span = document.createElement(active ? "span" : "button");
+      span.setAttribute("data-langbtn", c);
+      span.setAttribute("lang", c);
+      span.textContent = c.toUpperCase();
+      if (active) {
+        span.setAttribute("aria-current", "true");
+      } else {
+        span.type = "button";
+        span.addEventListener("click", function () { setLang(c); });
+      }
+      bar.replaceChild(span, el);
+    });
+    try { localStorage.setItem("lang", code); } catch (e) {}
+  }
+
+  Array.prototype.forEach.call(bar.querySelectorAll("button[data-langbtn]"), function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-langbtn")); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  if (saved === "en") { setLang("en"); }
+
+  // --- Aparición al hacer scroll, respetando prefers-reduced-motion ---
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!calm && "IntersectionObserver" in window) {
+    var nodes = Array.prototype.slice.call(document.querySelectorAll("#sobre, .job, .panel, .grid3"));
+    nodes.forEach(function (n) {
+      n.style.transition = "opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1)";
+      n.style.opacity = "0";
+      n.style.transform = "translateY(14px)";
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "none";
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    nodes.forEach(function (n) { io.observe(n); });
+
+    // Nunca dejar contenido invisible al imprimir.
+    window.addEventListener("beforeprint", function () {
+      nodes.forEach(function (n) { n.style.opacity = "1"; n.style.transform = "none"; });
+    });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Albert Polo Fernández",
+  "givenName": "Albert",
+  "familyName": "Polo Fernández",
+  "jobTitle": "Cloud System Engineer",
+  "url": "https://albertpolfer.github.io/",
+  "sameAs": ["https://www.linkedin.com/in/albertpolofernandez"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Barcelona",
+    "addressRegion": "Catalunya",
+    "addressCountry": "ES"
+  },
+  "knowsLanguage": [
+    { "@type": "Language", "name": "Catalan", "alternateName": "ca" },
+    { "@type": "Language", "name": "Spanish", "alternateName": "es" },
+    { "@type": "Language", "name": "English", "alternateName": "en" }
+  ],
+  "knowsAbout": [
+    "Linux", "Windows Server", "Active Directory", "Citrix", "VMware",
+    "Microsoft Azure", "Veeam", "Ansible", "PowerShell", "Python",
+    "Grafana", "Zabbix", "Office 365"
+  ],
+  "worksFor": { "@type": "Organization", "name": "M&G Corporate Consulting" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Tecnocampus" },
+    { "@type": "EducationalOrganization", "name": "Institut Tecnològic de Barcelona" }
+  ]
+}
+</script>
+
+</body>
+</html>

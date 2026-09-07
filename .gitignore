@@ -1,0 +1,19 @@
+# Red de seguridad: este repo se publica entero en GitHub Pages.
+# Nada personal ni ninguna fuente puede entrar aqui.
+
+*.pdf
+*.docx
+*.doc
+*.odt
+*.rtf
+*.zip
+
+uploads/
+Portfolio web de Albert Polo/
+.thumbnail
+
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.bak
