@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Portal de clientes · ReportAuto — Albert Polo</title>
+<meta name="description" content="Acceso al portal de ReportAuto. Sube el Excel de cuentas de la comunidad y descarga el informe mensual en PDF.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://albertpolfer.github.io/servicios/reportauto/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Albert Polo">
+<meta property="og:title" content="Portal de clientes · ReportAuto">
+<meta property="og:description" content="Acceso al portal. Sube el Excel de la comunidad y descarga el informe en PDF.">
+<meta property="og:url" content="https://albertpolfer.github.io/servicios/reportauto/">
+<meta property="og:image" content="https://albertpolfer.github.io/og-servicios.png">
+
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../styles.css">
+
+<style>
+  /* ---- Puerta del portal ---- */
+  .portal-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(26px, 4vw, 42px);
+    box-shadow: var(--glow);
+    max-width: 560px;
+  }
+  .portal-card .btn { width: 100%; margin-top: 22px; }
+
+  .estado {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 12px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1px solid var(--rule); border-radius: 999px;
+    padding: 7px 14px; margin-bottom: 22px;
+    color: var(--ink-soft);
+  }
+  .estado .luz {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--ink-soft); flex: none;
+  }
+  .estado.online { border-color: oklch(0.55 0.13 150 / 0.5); color: oklch(0.42 0.12 150); }
+  .estado.online .luz { background: oklch(0.55 0.15 150); }
+  .estado.offline { border-color: oklch(0.55 0.16 30 / 0.45); color: oklch(0.46 0.16 30); }
+  .estado.offline .luz { background: oklch(0.55 0.18 30); }
+
+  .pasos-portal { counter-reset: p; list-style: none; margin: 0; padding: 0; }
+  .pasos-portal li {
+    counter-increment: p;
+    position: relative; padding: 16px 0 16px 46px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pasos-portal li:last-child { border-bottom: 0; }
+  .pasos-portal li::before {
+    content: counter(p, decimal-leading-zero);
+    position: absolute; left: 0; top: 16px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.05em;
+    color: var(--brass);
+  }
+  .pasos-portal strong { display: block; margin-bottom: 3px; }
+  .pasos-portal span { color: var(--ink-soft); font-size: 0.95rem; }
+
+  .aviso-host {
+    border: 1px dashed var(--rule);
+    border-radius: var(--radius);
+    background: var(--mist);
+    padding: 20px 22px;
+    font-size: 0.95rem; line-height: 1.6;
+    max-width: 62ch;
+  }
+  .aviso-host p { margin: 0 0 10px; }
+  .aviso-host p:last-child { margin: 0; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../">Albert Polo<span class="dot">.</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú">
+      <span></span>
+    </button>
+    <nav class="site-nav" id="nav-principal" aria-label="Principal">
+      <a href="../../#sobre" data-i18n="nav.about">Sobre mí</a>
+      <a href="../../#experiencia" data-i18n="nav.experience">Experiencia</a>
+      <a href="../" data-i18n="nav.services">Servicios</a>
+      <a href="./" aria-current="page" data-i18n="nav.portal">Portal</a>
+      <a href="../../#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="lang-switch" aria-label="Selector de idioma" role="group">
+      <button type="button" class="lang-button is-active" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" class="lang-button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ================= ACCESO ================= -->
+  <section class="hero grid-bg">
+    <div class="wrap">
+      <div class="hero-grid hero-enter">
+        <div class="hero-copy">
+          <p class="kicker">ReportAuto · Acceso de clientes</p>
+          <h1>Portal de clientes<span class="dot">.</span></h1>
+          <p class="sub">Sube el Excel de cuentas de la comunidad y descarga el informe mensual en PDF. Si ya tienes cuenta, entra directamente.</p>
+        </div>
+
+        <div class="hero-visual">
+          <div class="portal-card">
+            <span class="estado" id="estado" role="status" aria-live="polite">
+              <span class="luz"></span><span id="estado-texto">Comprobando el servicio…</span>
+            </span>
+
+            <p class="eyebrow">Entrar</p>
+            <p style="margin:0;color:var(--ink-soft);font-size:.96rem">
+              El portal se abre en una aplicación aparte. Necesitas tu correo y contraseña;
+              para crear la cuenta hace falta un código que te paso yo.
+            </p>
+
+            <a class="btn solid" id="entrar" href="#" rel="noopener">Entrar al portal</a>
+            <a class="btn" id="crear" href="#" rel="noopener">Crear cuenta con código</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= QUÉ SE HACE AQUÍ ================= -->
+  <section class="section" id="que-hago">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Qué se hace en el portal</p>
+      <h2 class="title">Cuatro pasos, una vez al mes</h2>
+
+      <div class="two-col">
+        <ol class="pasos-portal">
+          <li>
+            <strong>Das de alta la comunidad</strong>
+            <span>Solo la primera vez. Nombre y, si quieres, tu referencia interna.</span>
+          </li>
+          <li>
+            <strong>Subes los ficheros del mes</strong>
+            <span>Movimientos de cuentas, listado de recibos y presupuesto. Excel o CSV, tal como los exporta tu programa.</span>
+          </li>
+          <li>
+            <strong>Revisas los avisos</strong>
+            <span>Si el saldo no cuadra o hay una fecha ilegible, el portal lo dice y no genera nada hasta que se corrija.</span>
+          </li>
+          <li>
+            <strong>Descargas el PDF</strong>
+            <span>La descarga arranca sola. El informe queda en tu historial según el plan.</span>
+          </li>
+        </ol>
+
+        <div>
+          <div class="callout">
+            <p class="big">Los cálculos los hace el sistema, no la IA.</p>
+            <p>Saldos, morosidad y desviaciones salen del cálculo sobre tus números. El modelo de lenguaje solo redacta el apartado de análisis, y recibe únicamente cifras agregadas: ni nombres de propietarios, ni identificadores de vivienda, ni el nombre de la comunidad.</p>
+          </div>
+
+          <p class="finenote">Los ficheros que subes se borran en cuanto se genera el informe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ESTADO DEL SERVICIO ================= -->
+  <section class="section" id="estado-servicio">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Antes de que preguntes</p>
+      <h2 class="title">En qué punto está</h2>
+
+      <div class="aviso-host">
+        <p><strong>El portal está en fase de pruebas.</strong> Funciona de extremo a extremo —subida, cálculo, validación y PDF— pero todavía se ejecuta en una máquina de desarrollo, no en un servidor permanente.</p>
+        <p>Eso significa que puede estar apagado a ratos. El indicador de arriba te dice si está en línea ahora mismo. Si lo ves apagado y necesitas un informe, escríbeme y lo levanto.</p>
+        <p>Antes de facturar publicaré la política de privacidad y el contrato de encargo de tratamiento que exige el RGPD, y te los pasaré para que los revises.</p>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn" href="../">Ver el servicio y los planes</a>
+        <a class="btn" href="../#contacto">Escribirme</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= PIE ================= -->
+<footer class="site-footer">
+  <div class="wrap inner">
+    <div class="cols">
+      <div>
+        <p class="label">Contacto</p>
+        <button type="button" class="mailbtn" data-mail>
+          <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+        </button>
+      </div>
+      <div>
+        <p class="label">Perfil</p>
+        <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
+      </div>
+      <div>
+        <p class="label">Siguiente</p>
+        <a class="go" href="../">Servicios &rarr;</a>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <span>Albert Polo · Barcelona</span>
+      <span>Actividad freelance compatible con mi empleo principal.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../app.js" defer></script>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ======================================================================
+     LA ÚNICA LÍNEA QUE HAY QUE CAMBIAR AL MOVER LA APLICACIÓN DE SITIO.
+
+     Hoy apunta a un túnel sobre la máquina de desarrollo, que cambia de
+     dirección cada vez que se reinicia. Cuando ReportAuto viva en un
+     servidor propio, aquí irá algo como https://app.albertpolo.dev
+     ====================================================================== */
+  var PORTAL = "https://express-changelog-rep-age.trycloudflare.com";
+
+  var entrar = document.getElementById("entrar");
+  var crear  = document.getElementById("crear");
+  entrar.href = PORTAL + "/entrar";
+  crear.href  = PORTAL + "/alta";
+
+  /* ---- Estado del servicio ----
+     Se consulta /salud, que devuelve CORS abierto a propósito. Si no
+     responde, el portal está apagado y más vale decirlo aquí que mandar
+     al cliente a una página muerta. */
+  var caja  = document.getElementById("estado");
+  var texto = document.getElementById("estado-texto");
+
+  function marcar(clase, mensaje, habilitado) {
+    caja.classList.remove("online", "offline");
+    if (clase) { caja.classList.add(clase); }
+    texto.textContent = mensaje;
+    [entrar, crear].forEach(function (b) {
+      b.setAttribute("aria-disabled", habilitado ? "false" : "true");
+      b.style.opacity = habilitado ? "" : ".5";
+      b.style.pointerEvents = habilitado ? "" : "none";
+    });
+  }
+
+  var aborta = new AbortController();
+  var reloj = setTimeout(function () { aborta.abort(); }, 6000);
+
+  fetch(PORTAL + "/salud", { signal: aborta.signal, cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (data) {
+      clearTimeout(reloj);
+      marcar("online", data.pdf ? "Portal en línea" : "En línea, sin PDF", true);
+    })
+    .catch(function () {
+      clearTimeout(reloj);
+      marcar(
+        "offline",
+        "Portal apagado ahora mismo",
+        false
+      );
+      var card = caja.closest(".portal-card");
+      if (card && !card.querySelector(".finenote")) {
+        var p = document.createElement("p");
+        p.className = "finenote";
+        p.style.marginTop = "16px";
+        p.textContent = "Escríbeme y lo levanto en un momento.";
+        card.appendChild(p);
+      }
+    });
+})();
+</script>
+
+</body>
+</html>
