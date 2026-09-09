@@ -25,3 +25,5 @@ desktop.ini
 
 # Copia local del sitio antes del rediseño (no publicar)
 _backup/
+
+# El generador vive fuera del repo publicado (../web-src/)

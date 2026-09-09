@@ -858,3 +858,7 @@ h2.title {
 }
 
 .idiomas { margin-top: 26px; font-size: 0.95rem; }
+
+/* El selector de idioma pasó de <button> a <a>: ahora cada idioma es una URL
+   propia, que es lo que permite a Google indexar las tres versiones. */
+a.lang-button { text-decoration: none; display: inline-block; line-height: 1; }

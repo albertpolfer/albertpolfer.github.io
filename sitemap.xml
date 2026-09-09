@@ -1,15 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://albertpolfer.github.io/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/ca/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://albertpolfer.github.io/servicios/</loc>
-    <lastmod>2026-09-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/en/services/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/ca/serveis/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/servicios/fincas/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/property/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/finques/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/en/services/property/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/property/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/finques/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/ca/serveis/finques/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/property/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/finques/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/fincas/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/servicios/marketing/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/marqueting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/en/services/marketing/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/marqueting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/ca/serveis/marqueting/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/marketing/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/marqueting/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/marketing/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/servicios/mantenimiento/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/field-service/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/manteniment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/en/services/field-service/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/field-service/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/manteniment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albertpolfer.github.io/ca/serveis/manteniment/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/field-service/"/>
+    <xhtml:link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/manteniment/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/mantenimiento/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

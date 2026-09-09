@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Portal de clients · ReportAuto | Albert Polo</title>
+<meta name="description" content="Accés al portal de ReportAuto. Puja els teus fitxers i descarrega l&#39;informe mensual en PDF.">
+<meta name="author" content="Albert Polo Fernández">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://albertpolfer.github.io/ca/serveis/portal/">
+
+<link rel="alternate" hreflang="es" href="https://albertpolfer.github.io/servicios/portal/">
+<link rel="alternate" hreflang="en" href="https://albertpolfer.github.io/en/services/portal/">
+<link rel="alternate" hreflang="ca" href="https://albertpolfer.github.io/ca/serveis/portal/">
+<link rel="alternate" hreflang="x-default" href="https://albertpolfer.github.io/servicios/portal/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:site_name" content="Albert Polo">
+<meta property="og:title" content="Portal de clients · ReportAuto | Albert Polo">
+<meta property="og:description" content="Accés al portal de ReportAuto. Puja els teus fitxers i descarrega l&#39;informe mensual en PDF.">
+<meta property="og:url" content="https://albertpolfer.github.io/ca/serveis/portal/">
+<meta property="og:image" content="https://albertpolfer.github.io/og-servicios.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Portal de clients · ReportAuto | Albert Polo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portal de clients · ReportAuto | Albert Polo">
+<meta name="twitter:description" content="Accés al portal de ReportAuto. Puja els teus fitxers i descarrega l&#39;informe mensual en PDF.">
+<meta name="twitter:image" content="https://albertpolfer.github.io/og-servicios.png">
+
+<link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+  .portal-card { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius);
+    padding: clamp(26px, 4vw, 42px); box-shadow: var(--glow); max-width: 560px; }
+  .portal-card .btn { width: 100%; margin-top: 22px; }
+  .estado { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono);
+    font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+    border: 1px solid var(--rule); border-radius: 999px; padding: 7px 14px;
+    margin-bottom: 22px; color: var(--ink-soft); }
+  .estado .luz { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-soft); flex: none; }
+  .estado.online { border-color: oklch(0.55 0.13 150 / .5); color: oklch(0.42 0.12 150); }
+  .estado.online .luz { background: oklch(0.55 0.15 150); }
+  .estado.offline { border-color: oklch(0.55 0.16 30 / .45); color: oklch(0.46 0.16 30); }
+  .estado.offline .luz { background: oklch(0.55 0.18 30); }
+  .pasos-portal { counter-reset: p; list-style: none; margin: 0; padding: 0; }
+  .pasos-portal li { counter-increment: p; position: relative; padding: 16px 0 16px 46px;
+    border-bottom: 1px solid var(--rule); }
+  .pasos-portal li:last-child { border-bottom: 0; }
+  .pasos-portal li::before { content: counter(p, decimal-leading-zero); position: absolute;
+    left: 0; top: 16px; font-family: var(--mono); font-size: 12px; color: var(--brass); }
+  .pasos-portal strong { display: block; margin-bottom: 3px; }
+  .pasos-portal span { color: var(--ink-soft); font-size: .95rem; }
+  .aviso-host { border: 1px dashed var(--rule); border-radius: var(--radius); background: var(--mist);
+    padding: 20px 22px; font-size: .95rem; line-height: 1.6; max-width: 62ch; }
+  .aviso-host p { margin: 0 0 10px; } .aviso-host p:last-child { margin: 0; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#contenido">Vés al contingut</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/ca/">Albert Polo<span class="dot">.</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Obrir menú">
+      <span></span>
+    </button>
+    <nav class="site-nav" id="nav-principal" aria-label="Serveis">
+      <a href="/ca/#sobre">Sobre mi</a>
+      <a href="/ca/#experiencia">Experiència</a>
+      <a href="/ca/serveis/">Serveis</a>
+      <a href="/ca/serveis/portal/" aria-current="page">Portal</a>
+      <a href="/ca/#trabajo">Portfolio</a>
+      <a href="#contacto">Contacte</a>
+    </nav>
+    <div class="lang-switch" aria-label="Selector d&#39;idioma" role="group">
+      <a class="lang-button"
+         href="/servicios/portal/" hreflang="es" lang="es"
+>ES</a>
+      <a class="lang-button"
+         href="/en/services/portal/" hreflang="en" lang="en"
+>EN</a>
+      <a class="lang-button is-active"
+         href="/ca/serveis/portal/" hreflang="ca" lang="ca"
+aria-current="true">CA</a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="hero grid-bg">
+    <div class="wrap">
+      <div class="hero-grid hero-enter">
+        <div class="hero-copy">
+          <p class="kicker">ReportAuto · Accés de clients</p>
+          <h1>Portal de clients<span class="dot">.</span></h1>
+          <p class="sub">Accedeix al teu espai, puja els fitxers del mes i descarrega l&#39;informe en PDF.</p>
+        </div>
+        <div class="hero-visual">
+          <div class="portal-card">
+            <span class="estado" id="estado" role="status" aria-live="polite">
+              <span class="luz"></span><span id="estado-texto">Comprovant el servei…</span>
+            </span>
+            <p class="eyebrow">Entrar</p>
+            <p style="margin:0;color:var(--ink-soft);font-size:.96rem">Accedeix amb el teu correu i contrasenya. L&#39;alta és per invitació: si encara no tens compte, escriu-me i et passo el teu codi.</p>
+            <a class="btn solid" id="entrar" href="#" rel="noopener">Entrar al portal</a>
+            <a class="btn" id="crear" href="#" rel="noopener">Crear compte amb codi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pasos">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Què es fa al portal</p>
+      <h2 class="title">Quatre passos, un cop al mes</h2>
+      <div class="two-col">
+        <ol class="pasos-portal">
+          <li><strong>Dones d&#39;alta el client</strong><span>Només la primera vegada. Nom i, si vols, la teva referència interna.</span></li>
+          <li><strong>Puges els fitxers del mes</strong><span>Excel o CSV, tal com els exporta el teu programa.</span></li>
+          <li><strong>Revises els avisos</strong><span>El portal comprova que les dades quadrin i t&#39;assenyala qualsevol dada dubtosa amb la fila exacta abans de generar l&#39;informe.</span></li>
+          <li><strong>Descarregues el PDF</strong><span>La descàrrega arrenca sola i l&#39;informe queda desat al teu historial.</span></li>
+        </ol>
+        <div>
+          <div class="callout">
+            <p class="big">Els càlculs els fa el sistema, no la IA.</p>
+            <p>Les xifres surten del càlcul sobre els teus números. El model de llenguatge només redacta l&#39;apartat d&#39;anàlisi, i rep únicament dades agregades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="garantias">
+    <div class="wrap" data-reveal>
+      <p class="eyebrow">Les teves dades</p>
+      <h2 class="title">Protegides per disseny</h2>
+      <div class="aviso-host">
+        <p><strong>Els fitxers que puges s'esborren tan bon punt es genera l'informe.</strong> No se'n conserva cap còpia.</p>
+        <p><strong>A la intel·ligència artificial no hi arriba cap dada personal.</strong> Només rep xifres agregades per redactar l'anàlisi. Els càlculs els fa el motor del sistema.</p>
+        <p>Cada compte accedeix únicament als seus propis informes, i el contracte d&#39;encàrrec del tractament s&#39;inclou en contractar.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn" href="/ca/serveis/">Veure els productes i els plans</a>
+        <a class="btn" href="/ca/serveis/#contacto">Sol·licitar accés</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap inner">
+    <div class="cols">
+      <div>
+        <p class="label">Contacte</p>
+        <button type="button" class="mailbtn" data-mail>
+          <span data-mail-text>albertpolfer (arroba) gmail (punto) com</span>
+        </button>
+      </div>
+      <div>
+        <p class="label">Perfil</p>
+        <a href="https://www.linkedin.com/in/albertpolofernandez" rel="me noopener">LinkedIn</a>
+      </div>
+      <div>
+        <p class="label">Següent</p>
+        <a class="go" href="/ca/">Sobre mi &rarr;</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <span>Albert Polo · Enginyer de sistemes · Barcelona</span>
+      <span>Col·laboracions compatibles amb la meva activitat professional.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../../app.js" defer></script>
+<script>
+(function () {
+  "use strict";
+  /* La direccion de la aplicacion se genera desde web-src/content.py */
+  var PORTAL = "https://express-changelog-rep-age.trycloudflare.com";
+  var T = { online: "Portal en línia", nopdf: "En línia, sense PDF",
+            offline: "Portal en manteniment", note: "Escriu-me i et dono accés tan bon punt estigui disponible." };
+
+  var entrar = document.getElementById("entrar");
+  var crear  = document.getElementById("crear");
+  entrar.href = PORTAL + "/entrar";
+  crear.href  = PORTAL + "/alta";
+
+  var caja  = document.getElementById("estado");
+  var texto = document.getElementById("estado-texto");
+
+  function marcar(clase, mensaje, activo) {
+    caja.classList.remove("online", "offline");
+    if (clase) { caja.classList.add(clase); }
+    texto.textContent = mensaje;
+    [entrar, crear].forEach(function (b) {
+      b.setAttribute("aria-disabled", activo ? "false" : "true");
+      b.style.opacity = activo ? "" : ".5";
+      b.style.pointerEvents = activo ? "" : "none";
+    });
+  }
+
+  var aborta = new AbortController();
+  var reloj = setTimeout(function () { aborta.abort(); }, 6000);
+
+  fetch(PORTAL + "/salud", { signal: aborta.signal, cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (d) {
+      clearTimeout(reloj);
+      marcar("online", d.pdf ? T.online : T.nopdf, true);
+    })
+    .catch(function () {
+      clearTimeout(reloj);
+      marcar("offline", T.offline, false);
+      var card = caja.closest(".portal-card");
+      if (card && !card.querySelector(".finenote")) {
+        var p = document.createElement("p");
+        p.className = "finenote";
+        p.style.marginTop = "16px";
+        p.textContent = T.note;
+        card.appendChild(p);
+      }
+    });
+})();
+</script>
+</body>
+</html>
