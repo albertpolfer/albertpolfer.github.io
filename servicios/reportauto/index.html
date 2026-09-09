@@ -114,7 +114,7 @@
         <div class="hero-copy">
           <p class="kicker">ReportAuto · Acceso de clientes</p>
           <h1>Portal de clientes<span class="dot">.</span></h1>
-          <p class="sub">Sube el Excel de cuentas de la comunidad y descarga el informe mensual en PDF. Si ya tienes cuenta, entra directamente.</p>
+          <p class="sub">Accede a tu espacio, sube el Excel de cuentas de la comunidad y descarga el informe mensual en PDF.</p>
         </div>
 
         <div class="hero-visual">
@@ -125,8 +125,8 @@
 
             <p class="eyebrow">Entrar</p>
             <p style="margin:0;color:var(--ink-soft);font-size:.96rem">
-              El portal se abre en una aplicación aparte. Necesitas tu correo y contraseña;
-              para crear la cuenta hace falta un código que te paso yo.
+              Accede con tu correo y contraseña. El alta es por invitación:
+              si aún no tienes cuenta, escríbeme y te paso tu código.
             </p>
 
             <a class="btn solid" id="entrar" href="#" rel="noopener">Entrar al portal</a>
@@ -155,11 +155,11 @@
           </li>
           <li>
             <strong>Revisas los avisos</strong>
-            <span>Si el saldo no cuadra o hay una fecha ilegible, el portal lo dice y no genera nada hasta que se corrija.</span>
+            <span>El portal comprueba que las cuentas cuadren y te señala cualquier dato dudoso con la fila exacta antes de generar el informe.</span>
           </li>
           <li>
             <strong>Descargas el PDF</strong>
-            <span>La descarga arranca sola. El informe queda en tu historial según el plan.</span>
+            <span>La descarga arranca sola y el informe queda guardado en tu historial.</span>
           </li>
         </ol>
 
@@ -175,21 +175,21 @@
     </div>
   </section>
 
-  <!-- ================= ESTADO DEL SERVICIO ================= -->
-  <section class="section" id="estado-servicio">
+  <!-- ================= GARANTÍAS ================= -->
+  <section class="section" id="garantias">
     <div class="wrap" data-reveal>
-      <p class="eyebrow">Antes de que preguntes</p>
-      <h2 class="title">En qué punto está</h2>
+      <p class="eyebrow">Tus datos</p>
+      <h2 class="title">Protegidos por diseño</h2>
 
       <div class="aviso-host">
-        <p><strong>El portal está en fase de pruebas.</strong> Funciona de extremo a extremo —subida, cálculo, validación y PDF— pero todavía se ejecuta en una máquina de desarrollo, no en un servidor permanente.</p>
-        <p>Eso significa que puede estar apagado a ratos. El indicador de arriba te dice si está en línea ahora mismo. Si lo ves apagado y necesitas un informe, escríbeme y lo levanto.</p>
-        <p>Antes de facturar publicaré la política de privacidad y el contrato de encargo de tratamiento que exige el RGPD, y te los pasaré para que los revises.</p>
+        <p><strong>Los ficheros que subes se borran en cuanto se genera el informe.</strong> No se conserva ninguna copia del Excel con los nombres y las deudas de los vecinos.</p>
+        <p><strong>A la inteligencia artificial no llega ningún dato personal.</strong> Solo recibe cifras agregadas para redactar el análisis: ni nombres de propietarios, ni identificadores de vivienda, ni el nombre de la comunidad. Los cálculos los hace el motor del sistema.</p>
+        <p>Cada cuenta accede únicamente a sus propios informes, y el contrato de encargo del tratamiento se incluye al contratar.</p>
       </div>
 
       <div class="btn-row">
         <a class="btn" href="../">Ver el servicio y los planes</a>
-        <a class="btn" href="../#contacto">Escribirme</a>
+        <a class="btn" href="../#contacto">Solicitar acceso</a>
       </div>
     </div>
   </section>
@@ -217,8 +217,8 @@
     </div>
 
     <div class="bottom">
-      <span>Albert Polo · Barcelona</span>
-      <span>Actividad freelance compatible con mi empleo principal.</span>
+      <span>Albert Polo · Ingeniero de sistemas · Barcelona</span>
+      <span>Colaboraciones compatibles con mi actividad profesional.</span>
     </div>
   </div>
 </footer>
@@ -274,7 +274,7 @@
       clearTimeout(reloj);
       marcar(
         "offline",
-        "Portal apagado ahora mismo",
+        "Portal en mantenimiento",
         false
       );
       var card = caja.closest(".portal-card");
@@ -282,7 +282,7 @@
         var p = document.createElement("p");
         p.className = "finenote";
         p.style.marginTop = "16px";
-        p.textContent = "Escríbeme y lo levanto en un momento.";
+        p.textContent = "Escríbeme y te doy acceso en cuanto esté disponible.";
         card.appendChild(p);
       }
     });

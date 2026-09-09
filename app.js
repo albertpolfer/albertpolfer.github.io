@@ -13,10 +13,10 @@
       "nav.portal": "Portal",
       "nav.work": "Portfolio",
       "nav.contact": "Contacto",
-      "hero.kicker": "Barcelona · Disponible para proyectos",
-      "hero.role": "Ingeniero de sistemas · infraestructura, automatización y ciberseguridad",
-      "hero.sub": "Diseño entornos que se pueden repetir, auditar y operar con scripts. Si un informe o un cambio hay que hacerlo treinta veces, no se hace a mano.",
-      "hero.contact": "Contactar conmigo",
+      "hero.kicker": "Barcelona · Azure · Microsoft 365",
+      "hero.role": "Ingeniero de sistemas cloud · Azure, Microsoft 365 e infraestructura como código",
+      "hero.sub": "Diseño y opero infraestructura que se despliega desde código, se audita y se repite. Escritorio remoto, identidad híbrida y automatización para empresas que necesitan que sus sistemas funcionen sin sobresaltos.",
+      "hero.contact": "Hablemos de tu proyecto",
       "hero.work": "Ver mi trabajo"
     },
     en: {
@@ -26,10 +26,10 @@
       "nav.portal": "Client portal",
       "nav.work": "Portfolio",
       "nav.contact": "Contact",
-      "hero.kicker": "Barcelona · Available for projects",
-      "hero.role": "Systems engineer · infrastructure, automation and cybersecurity",
-      "hero.sub": "I design environments that can be repeated, audited and operated with scripts. If an item has to be done thirty times, it is not done by hand.",
-      "hero.contact": "Get in touch",
+      "hero.kicker": "Barcelona · Azure · Microsoft 365",
+      "hero.role": "Cloud systems engineer · Azure, Microsoft 365 and infrastructure as code",
+      "hero.sub": "I design and run infrastructure that deploys from code, can be audited and can be rebuilt. Remote desktop, hybrid identity and automation for companies that need their systems to simply work.",
+      "hero.contact": "Let's talk about your project",
       "hero.work": "See my work"
     }
   };
